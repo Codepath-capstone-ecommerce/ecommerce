@@ -5,7 +5,9 @@ Pod Members: Kordell Schrock, Diego Saldonid
 ## Problem Statement
 
 Insert your groups problem statement and target audience.
+
 *local business hypothetical*
+
 A local business approached us and wanted us to build them a website. So we can take their business from only in-person to everyone with internet access. Over the past year with covid their sales declined due to closing their in-person store temporarily and now wants to have their store online to generate sales.
 
 # Description
