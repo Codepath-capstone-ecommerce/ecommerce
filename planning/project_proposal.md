@@ -2,7 +2,7 @@
 
 Pod Members: Kordell Schrock, Diego Saldonid
 
-##Problem Statement
+## Problem Statement
 
 Insert your groups problem statement and target audience.
 *local business hypothetical*
@@ -15,14 +15,14 @@ Our purpose is to empower community entrepreneurs to create their envisioned bus
 
 Components
 
--Landing page
--Cart
--Search bar
--Sign up page
--Individual items
--Dashboards (for vendor and seller)
--Desktop & Mobile
--Past History Orders from User Profile
+* Landing page
+* Cart
+* Search bar
+* Sign up page
+* Individual items
+* Dashboards (for vendor and seller)
+* Desktop & Mobile
+* Past History Orders from User Profile
  
 ## Related Work
 
@@ -35,7 +35,7 @@ In terms of functionality, we want to take inspiration from ebay, amazon and sho
 
 What questions do you still have? What topics do you need to research more for your project?
 
--Payment systems (Paypal, Stripe, coingate (https://coingate.com/) ) 
--Emailing list API 
--Cool UI components to make the website more unique
--Creating Dashboard Stats 
+* Payment systems (Paypal, Stripe, coingate (https://coingate.com/) ) 
+* Emailing list API 
+* Cool UI components to make the website more unique
+* Creating Dashboard Stats 
