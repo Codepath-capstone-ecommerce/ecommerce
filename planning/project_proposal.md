@@ -14,9 +14,11 @@ A local business approached us and wanted us to build them a website. So we can 
 
 What is the main purpose of your project? What are the key features your site has to offer its users? How will your targeted audience use your website?
 
-Our purpose is to empower community entrepreneurs to create their envisioned business without the cost of purchasing a physical location. We provide a customized ui to our client’s desire without having them worry about choosing from an endless list of templates or having to learn front end development. In addition, we want to display user analytics to our clients to allow them to make informed decisions on customer’s supply trends. As a stretch feature, we would like to provide recommendation and customization on the customer side as well. \
+Our purpose is to empower community entrepreneurs to create their envisioned business without the cost of purchasing a physical location. We provide a customized ui to our client’s desire without having them worry about choosing from an endless list of templates or having to learn front end development. In addition, we want to display user analytics to our clients to allow them to make informed decisions on customer’s supply trends. As a stretch feature, we would like to provide recommendation and customization on the customer side as well. 
 
 ## Expected Features List
+We will be using our frontend and backend knowledge from week 2 using react and node to create a responsive and accessible layout for our clients. In addition, we will
+leverage our newly acquired databases knowledge to create customized components and user information through our platform.
 
 Components
 
