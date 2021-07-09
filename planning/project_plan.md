@@ -100,7 +100,22 @@ Additional stories
       - Jane Dough will be redirected to a dashboard with user analytics and other financial details 
       
 ## 5. Screens 
-![Home Page](planning/assets/HomePage.png)
+![Home Page](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/HomePage.png)
+## Home Page
+![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/LoginPress.png)
+## Side Bar with Long Press
+![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/DeliveryPage.png)
+## Delivery Page
+![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/AccountProfile.png)
+## Account Profile Page
+![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/CustomerPage.png)
+## Customer Rewards Page
+![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/VendorDashboard.png)
+## Vendor Dashboard
+![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/RecentOrders.png)
+## Recent Orders from the Day
+![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/PastOrders.png)
+## Past Orders
 
 List of screens: 
   - Customer Order Page
