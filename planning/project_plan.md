@@ -111,8 +111,17 @@ List of screens:
   - Page disabled state w/ drawer pop-up
   
 ## 6. App Modal Diagram 
-
+![Pizza Database][planning/pizzaDB.png]
 ## 7. Endpoints
-
+| CRUD   | HTTP | Description                         | User Stories |
+|--------|------|-------------------------------------|--------------|
+| Create | POST | Add an order                        | 7            |
+| Create | POST | Add customer feedback forms         | 4,8          |
+| Update | PUT  | Update on any product deals         | 10           |
+| Update | PUT  | Update order's status when complete | 6            |
+| Read   | POST | Allow user to login                 | 11,12a,12b   |
+| Read   | GET  | Fetch the list of user's orders     | 1            |
+| Create | POST | Create a new user account           | 4            |
+| Update | PUT  | Update user's profile data          | 11           |
  
  
