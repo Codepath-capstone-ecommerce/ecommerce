@@ -100,6 +100,7 @@ Additional stories
       - Jane Dough will be redirected to a dashboard with user analytics and other financial details 
       
 ## 5. Screens 
+![Home Page](planning/assets/HomePage.png)
 
 List of screens: 
   - Customer Order Page
@@ -111,7 +112,7 @@ List of screens:
   - Page disabled state w/ drawer pop-up
   
 ## 6. App Modal Diagram 
-![Pizza Database](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/pizzaDB.png)
+![Pizza Database](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/pizzaDB.png)
 ## 7. Endpoints
 | CRUD   | HTTP | Description                         | User Stories |
 |--------|------|-------------------------------------|--------------|
