@@ -111,7 +111,7 @@ List of screens:
   - Page disabled state w/ drawer pop-up
   
 ## 6. App Modal Diagram 
-![Pizza Database][planning/pizzaDB.png]
+![Pizza Database][pizzaDB.png]
 ## 7. Endpoints
 | CRUD   | HTTP | Description                         | User Stories |
 |--------|------|-------------------------------------|--------------|
