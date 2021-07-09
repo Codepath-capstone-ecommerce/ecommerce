@@ -100,22 +100,23 @@ Additional stories
       - Jane Dough will be redirected to a dashboard with user analytics and other financial details 
       
 ## 5. Screens 
-![Home Page](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/HomePage.png)
 ## Home Page
-![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/LoginPress.png)
+![Home Page](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/HomePage.png)
 ## Side Bar with Long Press
-![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/DeliveryPage.png)
+![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/LoginPressState.png)
 ## Delivery Page
-![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/AccountProfile.png)
+![Delivery Page](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/DeliveryPage.png)
 ## Account Profile Page
-![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/CustomerPage.png)
+![Account Profile](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/AccountProfile.png)
 ## Customer Rewards Page
-![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/VendorDashboard.png)
+![Customer Page](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/CustomerPage.png)
 ## Vendor Dashboard
-![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/RecentOrders.png)
+![Vendor Dashboard](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/VendorDashboard.png)
 ## Recent Orders from the Day
-![Long Press](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/PastOrders.png)
+![Recent Orders](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/RecentOrders.png)
 ## Past Orders
+![Past Orders](https://github.com/Codepath-capstone-ecommerce/ecommerce/blob/main/planning/assets/PastOrders.png)
+
 
 List of screens: 
   - Customer Order Page
