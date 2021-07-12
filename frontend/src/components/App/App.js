@@ -1,23 +1,19 @@
-import logo from '../../logo.svg';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import VendorPastOrders from '../VendorPastOrders/VendorPastOrders';
+import VendorRecentOrders from '../VendorCurrentOrders/VendorCurrentOrders';
+import VendorDashboardHome from '../VendorDashboardHome/VendorDashboardHome';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/vendorDashboard" element={<VendorDashboardHome/>} />
+        <Route path="/vendor/currentOrders" element={<VendorRecentOrders/>} />
+        <Route path="/vendor/pastOrders" element={<VendorPastOrders/>} />
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }
