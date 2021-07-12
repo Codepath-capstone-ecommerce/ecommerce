@@ -3,6 +3,7 @@ import VendorPastOrders from '../VendorPastOrders/VendorPastOrders';
 import VendorRecentOrders from '../VendorCurrentOrders/VendorCurrentOrders';
 import VendorDashboardHome from '../VendorDashboardHome/VendorDashboardHome';
 import './App.css';
+// import UserAnalytics from '../UserAnalytics/UserAnalytics';
 
 function App() {
   return (
