@@ -3,13 +3,14 @@ import VendorPastOrders from '../VendorPastOrders/VendorPastOrders';
 import VendorRecentOrders from '../VendorCurrentOrders/VendorCurrentOrders';
 import VendorDashboardHome from '../VendorDashboardHome/VendorDashboardHome';
 import './App.css';
-// import UserAnalytics from '../UserAnalytics/UserAnalytics';
+import UserAnalytics from '../UserAnalytics/UserAnalytics';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
       <Routes>
+        <Route path="/userAnalytics" element={<UserAnalytics/>}/>
         <Route path="/vendorDashboard" element={<VendorDashboardHome/>} />
         <Route path="/vendor/currentOrders" element={<VendorRecentOrders/>} />
         <Route path="/vendor/pastOrders" element={<VendorPastOrders/>} />
