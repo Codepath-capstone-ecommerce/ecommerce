@@ -17,16 +17,6 @@ CREATE TABLE orders(
   placed_at             TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE order_detail (
-  order_id    INTEGER REFERENCES orders(id) ON DELETE CASCADE,
-  product_id  INTEGER REFERENCES products(id) ON DELETE CASCADE,
-  completed   BOOLEAN DEFAULT FALSE,
-  discount    INTEGER DEFAULT 0,
-  user_id     INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  PRIMARY KEY (product_id,order_id),
-  created_at  TIMESTAMP NOT NULL DEFAULT NOW()
-);
-
 CREATE TABLE products (
   id          SERIAL PRIMARY KEY,
   name        TEXT NOT NULL,
@@ -36,4 +26,14 @@ CREATE TABLE products (
   image_url   TEXT,
   price       BIGINT NOT NULL,
   description TEXT NOT NULL
+);
+
+CREATE TABLE order_detail (
+  order_id    INTEGER REFERENCES orders(id) ON DELETE CASCADE,
+  product_id  INTEGER REFERENCES products(id) ON DELETE CASCADE,
+  completed   BOOLEAN DEFAULT FALSE,
+  discount    INTEGER DEFAULT 0,
+  -- user_id     INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  PRIMARY KEY (product_id,order_id),
+  created_at  TIMESTAMP NOT NULL DEFAULT NOW()
 );
