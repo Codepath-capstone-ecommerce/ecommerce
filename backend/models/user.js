@@ -58,7 +58,7 @@ class User {
        VALUES ($1, $2, $3, $4, $5)
        RETURNING id, email, first_name, is_admin, created_at;
       `,
-      [ hashedPassword, normalizedEmail, credentials.first_name, credentials.last_name, credentials.isAdmin]
+      [ hashedPassword, normalizedEmail, credentials.first_name, credentials.last_name, credentials.is_admin]
     )
     const user = userResult.rows[0]
 
