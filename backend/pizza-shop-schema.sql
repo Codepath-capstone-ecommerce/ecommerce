@@ -1,6 +1,5 @@
 CREATE TABLE users (
   id          SERIAL PRIMARY KEY,
-  username    TEXT NOT NULL,
   password    TEXT NOT NULL,
   email       TEXT NOT NULL UNIQUE CHECK (POSITION('@' IN email) > 1),
   first_name  TEXT NOT NULL,
@@ -21,10 +20,10 @@ CREATE TABLE products (
   id          SERIAL PRIMARY KEY,
   name        TEXT NOT NULL,
   category    TEXT DEFAULT 'misc',
-  calories    INTEGER,
-  quantity    INTEGER DEFAULT 1, 
   image_url   TEXT,
-  price       BIGINT NOT NULL,
+  quantity    INTEGER DEFAULT 1,
+  price       INTEGER NOT NULL,
+  calories    INTEGER NOT NULL,
   description TEXT NOT NULL
 );
 
