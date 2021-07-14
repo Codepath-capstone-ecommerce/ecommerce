@@ -21,8 +21,9 @@ CREATE TABLE products (
   name        TEXT NOT NULL,
   category    TEXT DEFAULT 'misc',
   image_url   TEXT,
-  quantity    INTEGER DEFAULT 1, --this is for merch?
+  quantity    INTEGER DEFAULT 1,
   price       INTEGER NOT NULL,
+  calories    INTEGER NOT NULL,
   description TEXT NOT NULL
 );
 
