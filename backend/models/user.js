@@ -78,6 +78,43 @@ class User {
 
     return user
   }
+
+  static async updateUsersAddress({user, address}) {
+    if (!user) {
+      throw new BadRequestError("No user provided")
+    }
+    const requiredFields = ["address"]
+    requiredFields.forEach(field =>{
+      if(!address.hasOwnProperty(field)){
+          throw new BadRequestError(`Required field - ${field} - missing from request body.`)
+      }
+  })
+    const query = `
+    UPDATE users
+    SET address = $1
+    WHERE email = $2`
+
+    const result = await db.query(query, [address.address, user.email.toLowerCase()])
+     
+    return address.address + ": address has been updated!"
+  }
+
+  static async listOrdersForUser(user) {
+    const query = `
+      SELECT excercises.id AS "excerciseId",
+             excercises.name AS "name",
+             excercises.category AS "category",
+             excercises.duration AS "duration",
+             excercises.intensity AS "intensity",
+             excercises.timestamp AS "postedAt"
+      FROM excercises
+        JOIN users ON users.id = excercises.user_id
+      WHERE excercises.user_id = (SELECT id FROM users WHERE email = $1)
+    `
+    const result = await db.query(query, [user.email])
+
+    return result.rows
+  }
 }
 
 module.exports = User
