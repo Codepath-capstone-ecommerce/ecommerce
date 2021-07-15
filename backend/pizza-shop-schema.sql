@@ -6,12 +6,14 @@ CREATE TABLE users (
   last_name   TEXT NOT NULL,
   address     TEXT, 
   is_admin    BOOLEAN NOT NULL DEFAULT FALSE,
+  rewards     INTEGER DEFAULT 0,
   created_at  TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE orders(
   id                    SERIAL PRIMARY KEY,
   customer_id           INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  completed             BOOLEAN DEFAULT FALSE,
   delivery_address      TEXT,
   placed_at             TIMESTAMP NOT NULL DEFAULT NOW()
 );
