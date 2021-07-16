@@ -6,6 +6,7 @@ const { NotFoundError } = require("./utils/errors")
 const security = require("./middleware/security")
 const authRoutes = require("./routes/auth")
 const userRoutes = require("./routes/user")
+const orderRoutes = require("./routes/order")
 const productRoutes = require("./routes/product")
 
 const app = express()
@@ -26,6 +27,8 @@ app.use(security.extractUserFromJwt)
 app.use("/auth", authRoutes)
 
 app.use("/user", userRoutes)
+
+app.use("/order", orderRoutes)
 
 app.use("/products",productRoutes)
 

@@ -14,7 +14,7 @@ CREATE TABLE orders(
   id                    SERIAL PRIMARY KEY,
   customer_id           INTEGER REFERENCES users(id) ON DELETE CASCADE,
   completed             BOOLEAN DEFAULT FALSE,
-  delivery_address      TEXT,
+  delivery_address      TEXT NOT NULL,
   placed_at             TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
@@ -32,6 +32,7 @@ CREATE TABLE products (
 CREATE TABLE order_detail (
   order_id    INTEGER REFERENCES orders(id) ON DELETE CASCADE,
   product_id  INTEGER REFERENCES products(id) ON DELETE CASCADE,
+  quantity    INTEGER NOT NULL,
   completed   BOOLEAN DEFAULT FALSE,
   discount    INTEGER DEFAULT 0,
   -- user_id     INTEGER REFERENCES users(id) ON DELETE CASCADE,
