@@ -1,5 +1,6 @@
-import { Typography, LinearProgress, Box, Link, Divider, Card, CardMedia } from "@material-ui/core"
+import { Typography, LinearProgress, Box, Link, Divider, Card, CardMedia, Button } from "@material-ui/core"
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar"
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -17,58 +18,137 @@ const BorderLinearProgress = withStyles((theme) => ({
 }))(LinearProgress);
 
 export default function Rewards() {
-    const styles =
-    {
+    const [tab,setTab] = useState({
+        rewards:true,
+        orders:false,
+        favorites:false
+    })
 
-        media: {
-            height: 50,
-            paddingTop: '56.25%', // 16:9,
-            marginTop: '30'
-        }
-    };
+    const reward = () =>{
+        setTab((a) => (
+            {
+              orders:false, rewards:true,favorites:false
+            }
+          ))
+    }
+
+    const orders = () =>{
+        setTab((a) => (
+            {
+              orders:true, rewards:false,favorites:false
+            }
+          ))
+    }
+
+    const favorites = () =>{
+        setTab((a) => (
+            {
+              orders:false, rewards:false,favorites:true
+            }
+          ))
+    }
     return (
-        <div>
+        <Box>
             <NavBar></NavBar>
-            <Typography>
-                HEY,
-            </Typography>
-            <Typography>
-                Charles Lam
-            </Typography>
-            <Typography>
-                15/30
-            </Typography>
-            <BorderLinearProgress variant="determinate" value={50} />
-            <Box display="flex" flexDirection="row" justifyContent="space-between">
-                <Link>Rewards</Link>
-                <Link>Orders</Link>
-                <Link>Favorites</Link>
+            <Box px={80}>
+                <Box display="flex" justifyContent="space-between" px="auto">
+                    <Box display="flex" flexDirection="column" alignItems="flex-start">
+                        <Typography>
+                            HEY,
+                        </Typography>
+                        <Typography variant="h4">
+                            Charles Lam
+                        </Typography>
+                    </Box>
+                    <Typography variant="h4">
+                        15/30
+                    </Typography>
+                </Box>
+
+                <Box px="auto" pt={5}>
+                    <BorderLinearProgress variant="determinate" value={50} />
+                </Box>
+
+                <br></br>
+                <Box display="flex" flexDirection="row" justifyContent="space-between" px="auto" py={1}>
+                    <Button name="rewards" onClick={reward}>
+                        <Link>Rewards</Link>
+                    </Button>
+                    <Button onClick={orders}>
+                        <Link>Orders</Link>
+                    </Button>
+                    <Button onClick={favorites}>
+                        <Link>Favorites</Link>
+                    </Button>
+                </Box>
+                <Box px={15} py={2}>
+                    <Divider></Divider>
+                </Box>
+                {tab.rewards?
+                <Box display="flex" flexDirection="row" justifyContent="space-between" px="auto">
+                    <Card>
+                        <Box px={3} py={3}>
+                            <img src="http://codepath-lifetracker.surge.sh/static/media/codepath.70a9a31f.svg" width={100} height={200}></img>
+                            {/* <CardMedia
+                                className={styles.media}
+                                image="https://goo.gl/images/yDjWG9">
+                            </CardMedia> */}
+                            <Typography>Reward 1</Typography>
+                            <Typography>Unlock for 30 points</Typography>
+
+                        </Box>
+                    </Card>
+                    <Card>
+                        <Box px={3} py={3}>
+                            <img src="http://codepath-lifetracker.surge.sh/static/media/codepath.70a9a31f.svg" width={100} height={200}></img>
+                            {/* <CardMedia
+                                className={styles.media}
+                                image="https://goo.gl/images/yDjWG9">
+                            </CardMedia> */}
+                            <Typography>Reward 2</Typography>
+                            <Typography>Unlock for 30 points</Typography>
+
+                        </Box>
+                    </Card>
+                    <Card>
+                        <Box px={3} py={3}>
+                            <img src="http://codepath-lifetracker.surge.sh/static/media/codepath.70a9a31f.svg" width={100} height={200}></img>
+                            {/* <CardMedia
+                                className={styles.media}
+                                image="https://goo.gl/images/yDjWG9">
+                            </CardMedia> */}
+                            <Typography>Reward 2</Typography>
+                            <Typography>Unlock for 30 points</Typography>
+
+                        </Box>
+                    </Card>
+                </Box>: tab.orders?
+                <Card>
+                    <Box p={4} display="flex" flexDirection="column">
+                        <Typography>No Orders Yet</Typography>
+                        <Typography>Your recent online orders can be found here</Typography>
+                        <Button>
+                            <Link>
+                            Lets fix that
+                            </Link>
+                        </Button>
+                    </Box>
+                </Card>
+                :
+                <Card>
+                    <Box p={4} display="flex" flexDirection="column">
+                        <Typography>No Favorites Yet</Typography>
+                        <Typography>Your favorite orders can be found here</Typography>
+                        <Button>
+                            <Link>
+                            Lets fix that
+                            </Link>
+                        </Button>
+                    </Box>
+                </Card>
+                }
             </Box>
-            <Divider></Divider>
-            <Box display="flex" flexDirection="row" justifyContent="center">
-                <Card>
-                    <CardMedia
-                        className={styles.media}
-                        image="https://goo.gl/images/yDjWG9">
-                    </CardMedia>
-                    <Typography>Reward 1</Typography>
-                    <Typography>Unlock for 30 points</Typography>
-                </Card>
-                <Card>
-                    <CardMedia
-                        image="https://goo.gl/images/yDjWG9">
-                    </CardMedia>
-                    <Typography>Reward 2</Typography>
-                    <Typography>Unlock for 30 points</Typography>
-                </Card>
-                <Card>
-                    <CardMedia
-                        image="https://goo.gl/images/yDjWG9">
-                    </CardMedia>
-                    <Typography>Reward 3</Typography>
-                    <Typography>Unlock for 30 points</Typography>
-                </Card>
-            </Box>
-        </div>
+
+        </Box>
     )
 }

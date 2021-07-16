@@ -8,12 +8,13 @@ const useStyles = makeStyles(() => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
-        marginLeft: 80
+        marginLeft: 144
     },
     box: {
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
+        padding:16
     }
 }));
 export default function AccountProfile() {
@@ -22,32 +23,34 @@ export default function AccountProfile() {
         <div>
             <NavBar></NavBar>
             <Box className={classes.root}>
-                <Typography>Hey, Max!</Typography>
+                <Typography variant="h1" component="h2">Hey, Max!</Typography>
                 <Typography>Welcome to your account dashboard</Typography>
             </Box>
             <br></br>
 
             <Box className={classes.root}>
-                <Typography>Your Orders</Typography>
+                <Typography variant="h5">Your Orders</Typography>
                 <Link>View All</Link>
             </Box>
             <br></br>
 
             <Box className={classes.root}>
-                <Typography> Contact Info</Typography>
+                <Typography variant="h5"> Contact Info</Typography>
                 
                     <Card>
-                        <Box p ={2}>
-                            <Typography>Name</Typography>
-                            <Typography>Email</Typography>
-                            <Link>Edit</Link>
+                        <Box p={4}>
+                            <Box width={75}>
+                                <Typography>Name</Typography>
+                                <Typography>Email</Typography>
+                                <Link>Edit</Link>
+                            </Box>
                         </Box>
                     </Card>
             </Box>
             <br></br>
 
             <Box className={classes.root}>
-                <Typography>Saved Addresses </Typography>
+                <Typography variant="h5">Saved Addresses </Typography>
                 <Card>
                     <Box p ={3}>
                         <Typography>You don't have any saved addresses</Typography>
@@ -57,7 +60,7 @@ export default function AccountProfile() {
             <br></br>
 
             <Box className={classes.root}>
-                <Typography>Saved Payments </Typography>
+                <Typography variant="h5">Saved Payments </Typography>
                 <Card>
                     <Box p={3}>
                         <Typography>You don't have any saved methods</Typography>
@@ -67,7 +70,7 @@ export default function AccountProfile() {
             <br></br>
 
             <Box className={classes.root}>
-                <Typography>Email Notification</Typography>
+                <Typography variant="h5">Email Notification</Typography>
                 <Card>
                     <Box className={classes.box}>
                         <FormGroup>

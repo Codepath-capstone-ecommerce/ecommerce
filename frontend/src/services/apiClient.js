@@ -33,8 +33,8 @@ class ApiClient{
     }
   }
 
-  async listTotalExercise(){
-    return await this.request({endpoint:'exercise/total', method:"GET"})
+  async listProducts(){
+    return await this.request({endpoint:'products/get', method:"GET"})
   }
 
   
