@@ -6,12 +6,18 @@ import './App.css';
 import UserAnalytics from '../UserAnalytics/UserAnalytics';
 import Rewards from '../Rewards/Rewards';
 import AccountProfile from '../AccountProfile/AccountProfile';
+import Menu from '../Menu/Menu';
+import Login from '../Login/Login'
+import SignUp from "../SignUp/SignUp"
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
       <Routes>
+        <Route path="/signup" element={<SignUp/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/menu" element={<Menu/>}/>
         <Route path="/rewards" element={<Rewards/>}/>
         <Route path="/accountprofile" element={<AccountProfile/>}/>
         <Route path="/userAnalytics" element={<UserAnalytics/>}/>

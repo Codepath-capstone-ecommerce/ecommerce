@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NavBar(){
     const classes = useStyles()
     return(
-        <Box display="flex" justifyContent="space-between" m={3}>
+        <Box display="flex" justifyContent="space-between" m={3} px={15}>
             <img src = "http://codepath-lifetracker.surge.sh/static/media/codepath.70a9a31f.svg" alt = "logo" width="40px" height="40px"></img>
             <Box className={classes.root}>
                 <Button variant="outlined">Menus</Button>
