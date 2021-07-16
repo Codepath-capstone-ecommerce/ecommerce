@@ -24,7 +24,7 @@ class Order {
     const result = await db.query(
       `
           SELECT order_detail.id AS "order_detail_id",
-                product_id.product_id AS "product_id",
+                order_detail.product_id AS "product_id",
                 order_detail.quantity AS "quantity"
           FROM order_detail
           WHERE orders.id = $1
