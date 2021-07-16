@@ -99,21 +99,110 @@ class User {
     return address.address + ": address has been updated!"
   }
 
+  static async getRewardPoints({user}) {
+    if (!user) {
+      throw new BadRequestError("No user provided")
+    }
+    const query = `
+    SELECT (users.rewards)
+    FROM users
+    WHERE users.email = $1`
+
+    const result = await db.query(query, [user.email.toLowerCase()])
+     
+    return result.rows[0] 
+  }
+
+  static async addRewardPoints({user, pizzasPurchased}) {
+    if (!user) {
+      throw new BadRequestError("No user provided")
+    }
+    
+    const query = `
+    UPDATE users
+    SET rewards = rewards + $1
+    WHERE email = $2`
+
+    const result = await db.query(query, [pizzasPurchased.pizzasPurchased, user.email.toLowerCase()])
+    //const newTotal = await User.getRewardPoints({user})
+    // var obj = JSON.parse(newTotal.rewards);
+    // return obj.rewards + "hello"
+    return "Successfully Added: " + pizzasPurchased.pizzasPurchased 
+  }
+
+  static async removeRewardPoints({user, pointsRedeemed}) {
+    if (!user) {
+      throw new BadRequestError("No user provided")
+    }
+    
+    const query = `
+    UPDATE users
+    SET rewards = rewards - $1
+    WHERE email = $2 AND rewards >= $1`
+
+    const result = await db.query(query, [pointsRedeemed.pointsRedeemed, user.email.toLowerCase()])
+    
+    if(result.rowCount === 0){
+      return "Not Enough Points"
+    }
+    return "Successfully removed: " + pointsRedeemed.pointsRedeemed 
+  }
+
   static async listOrdersForUser(user) {
     const query = `
-      SELECT excercises.id AS "excerciseId",
-             excercises.name AS "name",
-             excercises.category AS "category",
-             excercises.duration AS "duration",
-             excercises.intensity AS "intensity",
-             excercises.timestamp AS "postedAt"
-      FROM excercises
-        JOIN users ON users.id = excercises.user_id
-      WHERE excercises.user_id = (SELECT id FROM users WHERE email = $1)
+      SELECT orders.id AS "orderId",
+          orders.completed AS "completed",
+          orders.placed_at AS "placed_at",
+          orders.delivery_address AS "delivery_address"
+      FROM orders
+        JOIN users ON users.id = orders.customer_id
+      WHERE orders.customer_id = (SELECT id FROM users WHERE email = $1)
     `
     const result = await db.query(query, [user.email])
 
     return result.rows
+  }
+
+  static async createOrder({ order, user }) {
+    if (!user) {
+      throw new BadRequestError("No user provided")
+    }
+    const requiredFields = ["name", "category", "quantity", "calories", "image_url"]
+    requiredFields.forEach(field =>{
+        if(!nutrition.hasOwnProperty(field)){
+            throw new BadRequestError(`Required field - ${field} - missing from request body.`)
+        }
+    })
+
+    // create a new nutrition to user
+
+    // id          SERIAL PRIMARY KEY,
+    // name        TEXT NOT NULL,
+    // category    TEXT,
+    // quantity    INTEGER,
+    // calories    INTEGER,
+    // image_url   TEXT,
+    // user_id     INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    // timestamp  TIMESTAMP NOT NULL DEFAULT NOW()
+
+    const orderResult = await db.query(
+      `
+      INSERT INTO nutrition (name, category, quantity, calories, image_url, user_id) 
+      VALUES ($1, $2, $3, $4, $5, (SELECT id FROM users WHERE email = $6))
+      RETURNING id,
+                name,
+                category,
+                quantity,
+                calories,
+                image_url,
+                timestamp AS "updatedAt"
+    `,
+    [nutrition.name, nutrition.category, nutrition.quantity, nutrition.calories, nutrition.image_url, user.email]
+    )
+    // get nutritionId
+    const nutritionId = orderResult.rows[0].id
+
+    return await Nutrition.fetchNutritionById(nutritionId)
   }
 }
 
