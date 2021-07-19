@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from '@date-io/date-fns';
-import { Drawer, Avatar, List, ListItem, ListItemText, ListItemIcon, Box, Card, Typography, CardContent } from "@material-ui/core";
+import { Drawer, Avatar, List, ListItem, ListItemText, ListItemIcon, Box, Card, Typography, CardContent, Button } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import MessageIcon from '@material-ui/icons/Message';
 import ListIcon from '@material-ui/icons/List';
@@ -14,6 +14,7 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ReportIcon from '@material-ui/icons/Report';
 import PersonRow from "../PersonRow/PersonRow";
 import { DateRangePicker } from 'react-date-range'; // date range
+import apiClient from '../../services/apiClient';
 
 const drawerWidth = 240;
 
@@ -68,6 +69,19 @@ export default function UserAnalytics() {
           key: 'selection'
         }
       ]);
+
+      const handleOnSubmit = async () => {
+
+        const {data, error } = await apiClient.getWeeklyOrders(
+            {
+                start_date:dateRange[0].startDate,
+                end_date:dateRange[0].endDate
+            })
+        console.log(data)
+      }
+    
+    const range = dateRange[0].endDate.getDate() - dateRange[0].startDate.getDate() +1
+    const start = dateRange[0].startDate.getUTCDate()
     return (
         <div className={classes.root}>
             <Drawer
@@ -139,7 +153,7 @@ export default function UserAnalytics() {
                     <PersonRow />
                 </Card>
             </Box>
-
+            <Button onClick={handleOnSubmit}>View Range</Button>
         </div>
     )
 }
