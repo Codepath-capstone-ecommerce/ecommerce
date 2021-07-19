@@ -25,6 +25,16 @@ router.post("/create", security.requireAuthenticatedUser, async (req, res, next)
     }
   })
 
+  router.get("/current", security.requireAuthenticatedUser, async (req, res, next) => {
+    try {
+      const user = res.locals.user
+      const orders = await Order.fetchAllWorkingOrderDetail()
+      return res.status(200).json({ orders })
+    } catch (err) {
+      next(err)
+    }
+  })
+
  
 
 
