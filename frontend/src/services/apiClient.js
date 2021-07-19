@@ -4,7 +4,7 @@ class ApiClient{
   constructor(remoteHostUrl){
     this.remoteHostUrl = remoteHostUrl
     this.token = null
-    this.tokenName = "fitness_app_token"
+    this.tokenName = "pizza_shop_token"
   }
 
   setToken(token){

@@ -9,6 +9,15 @@ import AccountProfile from '../AccountProfile/AccountProfile';
 import Menu from '../Menu/Menu';
 import Login from '../Login/Login'
 import SignUp from "../SignUp/SignUp"
+import { AppStateProvider} from "../../contexts/appStateContext"
+
+export default function AppContainer(){
+  return(
+    <AppStateProvider>
+      <App/>
+    </AppStateProvider>
+  )
+}
 
 function App() {
   return (
@@ -30,4 +39,3 @@ function App() {
   );
 }
 
-export default App;
