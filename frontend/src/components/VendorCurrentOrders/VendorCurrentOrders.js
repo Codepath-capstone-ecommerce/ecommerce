@@ -6,7 +6,20 @@ import ListItem from '@material-ui/core/ListItem';
 import classNames from "classnames";
 import Box from '@material-ui/core/Box';
 import { Container } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import VendorDashboard from "../VendorDashboard/VendorDashboard";
+import { useAppStateContext } from '../../contexts/appStateContext';
+import apiClient from "../../services/apiClient"
+
+const fetchOrderByID = async (id) => {
+  
+  const { data, error } = await apiClient.getOrderByID(Number(id))
+  // console.log(data.nutrition)
+  // console.log(typeof(data.nutrition))
+  if(data){
+    console.log(data)
+    }
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +49,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function VendorCurrentOrders() {
+  const { vendorState } = useAppStateContext()
   const classes = useStyles();
+  
+  // function handleClick(e) {
+  //   console.log(e)
+  //   e.preventDefault();
+    
+  // }
+
+
+  
+  const handleClick = value => console.log(value);
+
   return (
     <div className={classes.root}>
      
@@ -47,19 +72,60 @@ export default function VendorCurrentOrders() {
         Current Orders
         </Typography>
         <List>
-            {['Order 1', 'Order 2', 'Order 3', 'Order 4',].map((text, index) => (
+        {vendorState.currentOrders.map((order, index) => (
+        <ListItem button key={order.order_id}>
+        <Box
+        border={.1}
+        //style ={ index % 2? { background : "#F3F3F3" }:{ background : "white" }}
+        display="flex"
+        flexWrap="wrap"
+        p={1}
+        // bgcolor="background.paper"
+        justifyContent = 'space-between'
+        width="100%" 
+        borderRadius={10}>
+          
+        Order #{order.order_id}
+        <button 
+        variant="contained" 
+        color="primary" 
+        style={{ height: 40 }}
+        value={Number(order.order_id)}
+        onClick={() => handleClick(order.order_id)}
+        
+        >
+        Show More
+      </button>
+        </Box>
+        
+      </ListItem>
+            ))}
+            {/* {vendorState.map((text, index) => (
               <ListItem button key={text}>
                 <Box
+                border={.1}
+                style ={ index % 2? { background : "#F3F3F3" }:{ background : "white" }}
                 display="flex"
                 flexWrap="wrap"
                 p={1}
                 // bgcolor="background.paper"
                 justifyContent = 'space-between'
+                width="100%" 
                 borderRadius={10}>
+                  
                 {text}
+                <Button 
+                variant="contained" 
+                color="primary" 
+                style={{ height: 40 }}
+                onClick={handleClick}
+              >
+                Show More
+              </Button>
                 </Box>
+                
               </ListItem>
-            ))}
+            ))} */}
           </List>
         </Container>
       </main>
