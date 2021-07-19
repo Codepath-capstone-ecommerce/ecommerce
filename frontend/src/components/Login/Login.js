@@ -1,17 +1,16 @@
 import Button from '@material-ui/core/Button';
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Grid, Paper ,Avatar, TextField, Typography, Link} from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import axios from "axios"
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useNavigate } from "react-router-dom";
 import apiClient from '../../services/apiClient';
 import { useAppStateContext } from '../../contexts/appStateContext';
 
 
-export default function Login({ user, setUser }){
-    // const { appState, setAppState} = useAppStateContext()
+export default function Login(){
+    const { appState, setAppState} = useAppStateContext()
     const navigate = useNavigate()
     const [isProcessing, setIsProcessing] = useState(false)
     const [errors, setErrors] = useState({})
@@ -24,25 +23,25 @@ export default function Login({ user, setUser }){
         setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
     }
 
-    // const handleOnSubmit = async () => {
-    //     setIsProcessing(true)
-    //     setErrors((e) => ({ ...e, form: null }))
+    const handleOnSubmit = async () => {
+        setIsProcessing(true)
+        setErrors((e) => ({ ...e, form: null }))
 
-    //     const {data, error } = await apiClient.loginUser({email: form.email, password: form.password})
-    //     if (error){
-    //       setErrors((e) => ({ ...e, form:error}))
-    //     }
-    //     if (data?.user){
-    //         setAppState((a) => (
-    //             {
-    //                 ...a, user: data.user,isAuthenticated: true
-    //             }
-    //             ))
-    //       apiClient.setToken(data.token)
-    //     }
-    //     setIsProcessing(false)
-    //     navigate("/activity")
-    //   }
+        const {data, error } = await apiClient.loginUser({email: form.email, password: form.password})
+        if (error){
+          setErrors((e) => ({ ...e, form:error}))
+        }
+        if (data?.user){
+            setAppState((a) => (
+                {
+                    ...a, user: data.user,isAuthenticated: true
+                }
+                ))
+          apiClient.setToken(data.token)
+        }
+        setIsProcessing(false)
+        navigate("/accountProfile")
+      }
 
     const paperStyle = {
         padding:20,
@@ -90,7 +89,7 @@ export default function Login({ user, setUser }){
                     label="Remember Me"
                 />
                 <Button 
-                    // onClick ={handleOnSubmit}
+                    onClick ={handleOnSubmit}
                     type = 'submit' 
                     variant = "contained" 
                     color = 'primary' 
