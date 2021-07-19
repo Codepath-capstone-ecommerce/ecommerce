@@ -31,7 +31,7 @@ class Order {
           FROM order_detail
           WHERE order_detail.order_id = $1
         `,
-      [orderId]
+      [orderId.orderId]
     );
 
     return result.rows;
@@ -54,12 +54,11 @@ class Order {
   static async fetchAllWorkingOrderDetail() {
     const result = await db.query(
       `
-          SELECT order_detail.order_id AS "order_detail_id",
-                order_detail.product_id AS "product_id",
-                order_detail.quantity AS "quantity",
-                order_detail.completed
+          SELECT DISTINCT order_detail.order_id
           FROM order_detail
           WHERE order_detail.completed = FALSE
+          ORDER BY order_id ASC
+         
         `,
     );
 
