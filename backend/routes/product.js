@@ -27,4 +27,14 @@ router.post("/create", async (req, res, next) => {
     }
   })
 
+
+  router.get("/byName", async (req, res, next) => {
+    try {
+      const productResponse = await Products.fetchProductByName({productName:req.body})
+      return res.status(200).json({ productResponse })
+    } catch (err) {
+      next(err)
+    }
+  })
+
   module.exports = router
