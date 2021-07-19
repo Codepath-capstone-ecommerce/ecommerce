@@ -37,7 +37,14 @@ class ApiClient{
     return await this.request({endpoint:'products/get', method:"GET"})
   }
 
-  
+  async getCurrentOrders(){
+    return await this.request({endpoint:'order/current', method:"GET"})
+  }
+
+  async getOrderByID(){
+    return await this.request({endpoint:'order/detailByID', method:"GET"})
+  }
+
   async createNutrition(nutrition){
     return await this.request({ endpoint:'nutrition', method: "POST", data: nutrition})
   }
