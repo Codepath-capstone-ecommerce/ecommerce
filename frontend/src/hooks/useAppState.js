@@ -10,6 +10,7 @@ export default function useAppState() {
     favorites:[],
     rewards: 0,
   })
+  
 
   useEffect(() => {
     const fetchUser = async () => {

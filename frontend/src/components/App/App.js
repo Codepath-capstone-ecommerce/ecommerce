@@ -9,6 +9,7 @@ import AccountProfile from '../AccountProfile/AccountProfile';
 import Menu from '../Menu/Menu';
 import Login from '../Login/Login'
 import SignUp from "../SignUp/SignUp"
+import Cart from '../Cart/Cart';
 import { AppStateProvider} from "../../contexts/appStateContext"
 
 export default function AppContainer(){
@@ -24,6 +25,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Routes>
+        <Route path="/cart" element={<Cart/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/menu" element={<Menu/>}/>

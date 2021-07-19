@@ -1,6 +1,7 @@
 import { Typography, Card, Link, Checkbox, Box, FormGroup, FormControlLabel } from "@material-ui/core"
 import NavBar from "../NavBar/NavBar"
 import { makeStyles } from '@material-ui/core/styles';
+import { useAppStateContext } from '../../contexts/appStateContext';
 
 
 const useStyles = makeStyles(() => ({
@@ -18,12 +19,13 @@ const useStyles = makeStyles(() => ({
     }
 }));
 export default function AccountProfile() {
+    const { appState} = useAppStateContext()
     const classes = useStyles()
     return (
         <div>
             <NavBar></NavBar>
             <Box className={classes.root}>
-                <Typography variant="h1" component="h2">Hey, Max!</Typography>
+                <Typography variant="h1" component="h2">Hey, {appState.name}!</Typography>
                 <Typography>Welcome to your account dashboard</Typography>
             </Box>
             <br></br>
@@ -40,8 +42,8 @@ export default function AccountProfile() {
                     <Card>
                         <Box p={4}>
                             <Box width={75}>
-                                <Typography>Name</Typography>
-                                <Typography>Email</Typography>
+                                <Typography>{appState.name}</Typography>
+                                <Typography>{appState.user.email}</Typography>
                                 <Link>Edit</Link>
                             </Box>
                         </Box>

@@ -37,9 +37,16 @@ class ApiClient{
     return await this.request({endpoint:'products/get', method:"GET"})
   }
 
+  async listCart(){
+    return await this.request({endpoint:'products/cart', method:"GET"})
+  }
   
   async createNutrition(nutrition){
     return await this.request({ endpoint:'nutrition', method: "POST", data: nutrition})
+  }
+
+  async fetchUserFromToken(){
+    return await this.request({ endpoint:'auth/me', method:"GET"})
   }
 
   async loginUser(credentials){

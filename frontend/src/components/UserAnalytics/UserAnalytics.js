@@ -9,9 +9,11 @@ import PeopleIcon from '@material-ui/icons/People';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import BarGraph from "../BarGraph/BarGraph";
 import LineGraph from "../LineGraph/LineGraph";
+import classNames from "classnames";
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ReportIcon from '@material-ui/icons/Report';
 import PersonRow from "../PersonRow/PersonRow";
+import { DateRangePicker } from 'react-date-range'; // date range
 
 const drawerWidth = 240;
 
@@ -59,6 +61,13 @@ const useStyles = makeStyles((theme) => ({
 export default function UserAnalytics() {
     const [selectedDate, handleDateChange] = useState(new Date());
     const classes = useStyles();
+    const [dateRange, setDateRange] = useState([
+        {
+          startDate: new Date(),
+          endDate: new Date(),
+          key: 'selection'
+        }
+      ]);
     return (
         <div className={classes.root}>
             <Drawer
@@ -89,8 +98,8 @@ export default function UserAnalytics() {
                     </ListItem>
                 </List>
             </Drawer>
-            <Box display="flex" flexDirection="column">
-                <Box display="flex" flexDirection="row">
+            <Box m={4} display="flex" flexDirection="column" justifyContent="center">
+                <Box m= {4} display="flex" flexDirection="row" justifyContent="space-between">
                     <Card className={classes.card}>
                         <CardContent className={classes.cardcontent}>
                             <AttachMoneyIcon />
@@ -110,23 +119,25 @@ export default function UserAnalytics() {
                         </CardContent>
                     </Card>
                 </Box>
+                <DateRangePicker
+                    onChange={item => setDateRange([item.selection])}
+                    showSelectionPreview={true}
+                    moveRangeOnFirstSelection={false}
+                    months={2}
+                    ranges={dateRange}
+                    direction="horizontal"
+                    className={classNames(classes.dateRange)}
+                />
+                <br></br>
                 <LineGraph />
+                <br></br>
+                <br></br>
                 <Card className={classes.newCus}>
                     <Typography>New Customers</Typography>
                     <PersonRow />
                     <PersonRow />
                     <PersonRow />
                 </Card>
-            </Box>
-            <Box display="flex" flexDirection="column">
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <DatePicker
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        variant="static"
-                    />
-                </MuiPickersUtilsProvider>
-                <BarGraph />
             </Box>
 
         </div>
