@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const { BCRYPT_WORK_FACTOR } = require("../config");
 const db = require("../db");
 const { BadRequestError, UnauthorizedError } = require("../utils/errors");
+const Products = require("../models/products")
 
 class Order {
   static async fetchOrderById(orderId) {
@@ -23,17 +24,48 @@ class Order {
   static async fetchOrderDetailById(orderId) {
     const result = await db.query(
       `
-          SELECT order_detail.id AS "order_detail_id",
+          SELECT order_detail.order_id AS "order_detail_id",
                 order_detail.product_id AS "product_id",
-                order_detail.quantity AS "quantity"
+                order_detail.quantity AS "quantity",
+                order_detail.completed
           FROM order_detail
-          WHERE orders.id = $1
+          WHERE order_detail.order_id = $1
         `,
       [orderId]
     );
 
     return result.rows;
   }
+
+  static async fetchAllOrderDetail() {
+    const result = await db.query(
+      `
+          SELECT order_detail.order_id AS "order_detail_id",
+                order_detail.product_id AS "product_id",
+                order_detail.quantity AS "quantity",
+                order_detail.completed
+          FROM order_detail
+        `,
+    );
+
+    return result.rows;
+  }
+
+  static async fetchAllWorkingOrderDetail() {
+    const result = await db.query(
+      `
+          SELECT order_detail.order_id AS "order_detail_id",
+                order_detail.product_id AS "product_id",
+                order_detail.quantity AS "quantity",
+                order_detail.completed
+          FROM order_detail
+          WHERE order_detail.completed = FALSE
+        `,
+    );
+
+    return result.rows;
+  }
+
   static async listOrdersForUser({ user }) {
     const query = `
         SELECT orders.id,
@@ -108,29 +140,30 @@ class Order {
     // created_at  TIMESTAMP NOT NULL DEFAULT NOW()
 
     let arr = cart.cart.products;
-
+    //console.log(arr.length)
     for (let i = 0; i < arr.length; i++) {
       let obj = arr[i];
       let productName = Object.keys(obj)[0]; //LOOKUP product name in products to get productID type Integer
+      let id = await Products.fetchProductByName(productName)
+      let productId =  id[0].productId // grab the productID for each product
       let quantity = Number(obj[productName]);
-      productName = 1;
+    //   console.log(order[0].orderId)
+    //   console.log(productId)
+    //   console.log(quantity)
       
       const orderResult = await db.query(
         `
             INSERT INTO order_detail (order_id, product_id, quantity) 
             VALUES ($1, $2, $3)
-                    RETURNING order_id,
-                    product_id,
-                    quantity,
-                    created_at AS "created_at"
           `,
-        [order[0].orderId, productName, quantity]
+        [order[0].orderId, productId, quantity]
       );
-      productName += 1;
     }
 
     // get orderID
-    const orderID = orderResult.rows[0].order_id;
+    const orderID = order[0].orderId
+    //console.log(orderID)
+    //console.log(orderID.productId)
 
     return await Order.fetchOrderDetailById(orderID);
   }
