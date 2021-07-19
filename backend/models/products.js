@@ -5,7 +5,8 @@ class Products {
     // loook into joing orders with order_details
     static async listCurrentProducts() {
         const query = `
-          SELECT products.name AS "name",
+          SELECT products.id AS "productId",
+                 products.name AS "name",
                  products.image_url AS "image",
                  products.price AS "price",
                  products.calories AS "cals"
@@ -45,6 +46,22 @@ class Products {
         `,
             [productId]
         )
+
+        return result.rows
+    }
+
+    static async fetchProductByName(productName) {
+        //console.log(productName)
+        const result = await db.query(
+        `
+        SELECT products.id AS "productId",
+               products.name AS "name"
+        FROM products
+        WHERE products.name LIKE $1
+        `,
+            [productName]
+        )
+       // console.log(result.rows)
 
         return result.rows
     }
