@@ -8,6 +8,7 @@ const authRoutes = require("./routes/auth")
 const userRoutes = require("./routes/user")
 const orderRoutes = require("./routes/order")
 const productRoutes = require("./routes/product")
+const analyticsRoutes = require("./routes/admin")
 
 const app = express()
 
@@ -31,6 +32,8 @@ app.use("/user", userRoutes)
 app.use("/order", orderRoutes)
 
 app.use("/products",productRoutes)
+
+app.use("/admin",analyticsRoutes)
 
 /** Handle 404 errors -- this matches everything */
 app.use((req, res, next) => {

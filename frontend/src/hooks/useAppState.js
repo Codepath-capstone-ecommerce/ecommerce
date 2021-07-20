@@ -10,6 +10,7 @@ export default function useAppState() {
     favorites:[],
     rewards: 0,
   })
+  
 
   const [vendorState, setvendorState] = useState({
     currentOrders: []

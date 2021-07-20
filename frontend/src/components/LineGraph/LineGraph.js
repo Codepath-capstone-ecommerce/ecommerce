@@ -1,5 +1,14 @@
 import {Line} from 'react-chartjs-2';
 
+const days ={
+  1:'Mon',
+  2:'Tues',
+  3:'Wed',
+  4:'Thurs',
+  5:'Fri',
+  6:'Sat',
+  7:'Sun'
+}
 const state = {
   labels: ['Mon', 'Tues', 'Wed',
            'Thurs', 'Fri','Sat','Sun'],
