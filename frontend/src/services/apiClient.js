@@ -37,6 +37,18 @@ class ApiClient {
     return await this.request({ endpoint: 'admin/weeklyorders', method: "POST", data:data})
   }
 
+  async getCurrentOrders(){
+    return await this.request({endpoint:'order/current', method:"GET"})
+  }
+
+  async getOrderByID(){
+    return await this.request({endpoint:'order/detailByID', method:"GET"})
+  }
+
+  async createNutrition(nutrition){
+    return await this.request({ endpoint:'nutrition', method: "POST", data: nutrition})
+  }
+  
   async createOrder(data) {
     return await this.request({ endpoint: 'order/create', method: "POST", data:data})
   }

@@ -12,6 +12,10 @@ export default function useAppState() {
   })
   
 
+  const [vendorState, setvendorState] = useState({
+    currentOrders: []
+  })
+
   useEffect(() => {
     const fetchUser = async () => {
       const { data, error } = await apiClient.fetchUserFromToken()
@@ -30,6 +34,21 @@ export default function useAppState() {
       apiClient.setToken(token)
       fetchUser()
     }
+  }, [])
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const { data, error } = await apiClient.getCurrentOrders()
+      if (data) {
+        setvendorState((a) => (
+          {
+            ...a, currentOrders: data.orders
+          }
+        ))
+      }
+      if (error) setError(error)
+    }
+    fetchOrders()
   }, [])
 
   // useEffect(() => {
@@ -69,5 +88,5 @@ export default function useAppState() {
 
   // }, [appState.isAuthenticated])
 
-  return { appState, error, setAppState, setError }
+  return { appState, error, setAppState, setError, vendorState, setvendorState }
 }

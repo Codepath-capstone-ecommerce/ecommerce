@@ -5,9 +5,9 @@ import useAppState from "../hooks/useAppState";
 const AppStateContext = createContext(null)
 
 export const AppStateProvider =({ children }) =>{
-    const { appState, error, setAppState, setError } = useAppState()
+    const { appState, error, setAppState, setError, vendorState, setvendorState } = useAppState()
     return(
-        <AppStateContext.Provider value={{appState,error,setAppState,setError}}>
+        <AppStateContext.Provider value={{appState,error,setAppState,setError, vendorState, setvendorState}}>
             <>{children}</>
         </AppStateContext.Provider>
     )
