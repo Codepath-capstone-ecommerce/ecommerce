@@ -18,17 +18,17 @@ class Admin {
       }
 
     //find some way to send start and end dates to this function
-    static async grabWeeklyOrders({start_date,end_date}) {
+    static async grabWeeklyOrders({start_date}) {
       const start = start_date.slice(0,10)
         //find way to group by each day of the week
         const query = `
             SELECT COUNT(*)
             FROM orders
-            WHERE placed_at >= '${start}'
+            WHERE placed_at >= '${start} 00:00:00'
+            AND placed_at <= '${start} 11:59:59'
         `
         const result = await db.query(query)
-        console.log(result.rows)
-        return result.rows[0]
+        return result.rows[0]['count']
     }
 
     static async grabWeeklyCustomer(start_date,end_date) {
