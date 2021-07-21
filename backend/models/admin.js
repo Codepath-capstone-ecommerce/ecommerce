@@ -4,44 +4,44 @@ const db = require("../db")
 const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 
 class Admin {
-    // loook into joing orders with order_details
-    static async listCurrentOrders() {
-        const query = `
+  // loook into joing orders with order_details
+  static async listCurrentOrders() {
+    const query = `
           SELECT order.id AS "orId",
                  order.customer_id AS "cusId",
                  order.delivery_address AS "addy"
           FROM orders
           WHERE orders.completed = True
         `
-        const result = await db.query(query)
-        return result.rows
-      }
+    const result = await db.query(query)
+    return result.rows
+  }
 
-    //find some way to send start and end dates to this function
-    static async grabWeeklyOrders({start_date}) {
-      const start = start_date.slice(0,10)
-        //find way to group by each day of the week
-        const query = `
+  //find some way to send start and end dates to this function
+  static async grabWeeklyOrders({ start_date }) {
+    const start = start_date.slice(0, 10)
+    //find way to group by each day of the week
+    const query = `
             SELECT COUNT(*)
             FROM orders
             WHERE placed_at >= '${start} 00:00:00'
             AND placed_at <= '${start} 11:59:59'
         `
-        const result = await db.query(query)
-        return result.rows[0]['count']
-    }
+    const result = await db.query(query)
+    return result.rows[0]['count']
+  }
 
-    static async grabWeeklyCustomer(start_date,end_date) {
-        const query = `
-          SELECT order.id AS "orId",
-                 order.customer_id AS "cusId",
-                 order.delivery_address AS "addy"
-          FROM orders
-          WHERE orders.completed = True
-        `
-        const result = await db.query(query)
-        return result.rows
-      }
+  static async grabWeeklyCustomer({ start_date }) {
+    const start = start_date.slice(0, 10)
+    const query = `
+      SELECT COUNT(*)
+      FROM users
+      WHERE created_at >= '${start} 00:00:00'
+      AND created_at <= '${start} 11:59:59'
+  `
+    const result = await db.query(query)
+    return result.rows[0]['count']
+  }
 
   static async login(credentials) {
     const requiredFields = ["email", "password"]
