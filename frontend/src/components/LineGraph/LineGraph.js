@@ -72,10 +72,30 @@ export default function LineGraph({ range, dateRange, start }) {
     more.push(data[i]['orders'])
   }
 
+  console.log(start)
+  let labels =[]
+  if (range>7){
+    start = start.getUTCDate()
+    for(let i =0;i<range;i++){
+      labels.push(start)
+      start+=1
+    }
+  }else{
+    start = start.getUTCDay()
+    for(let i =0;i<range;i++){
+      labels.push(days[start])
+      start+=1
+      if (start>7){
+        start =1
+      }
+    }
+  }
+
+  console.log(labels)
+
 
   const state = {
-    labels: ['Mon', 'Tues', 'Wed',
-      'Thurs', 'Fri', 'Sat', 'Sun'],
+    labels: (labels),
     datasets: [
       {
         label: 'Sales',
