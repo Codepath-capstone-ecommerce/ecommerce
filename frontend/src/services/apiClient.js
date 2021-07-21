@@ -41,8 +41,9 @@ class ApiClient {
     return await this.request({endpoint:'order/current', method:"GET"})
   }
 
-  async getOrderByID(){
-    return await this.request({endpoint:'order/detailByID', method:"GET"})
+  async getOrderByID(id){
+    console.log("APi Client, " , id)
+    return await this.request({endpoint:'order/detailByID', method:"GET",  data:id})
   }
 
   async createOrder(data) {
