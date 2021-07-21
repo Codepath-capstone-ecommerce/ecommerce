@@ -71,7 +71,7 @@ export default function UserAnalytics() {
       ]);
     
     const range = dateRange[0].endDate.getDate() - dateRange[0].startDate.getDate() +1
-    const start = dateRange[0].startDate.getUTCDate()
+    const start = dateRange[0].startDate
     return (
         <div className={classes.root}>
             <Drawer
@@ -133,7 +133,7 @@ export default function UserAnalytics() {
                     className={classNames(classes.dateRange)}
                 />
                 <br></br>
-                <LineGraph range={range} dateRange={dateRange}/>
+                <LineGraph range={range} dateRange={dateRange} start={start}/>
                 <br></br>
                 <br></br>
                 <Card className={classes.newCus}>
