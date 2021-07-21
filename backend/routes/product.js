@@ -28,9 +28,9 @@ router.post("/create", async (req, res, next) => {
   })
 
 
-  router.get("/byName", async (req, res, next) => {
+  router.post("/byName", async (req, res, next) => {
     try {
-      const productResponse = await Products.fetchProductByName({productName:req.body})
+      const productResponse = await Products.fetchProductByName(req.body.productName.name)
       return res.status(200).json({ productResponse })
     } catch (err) {
       next(err)

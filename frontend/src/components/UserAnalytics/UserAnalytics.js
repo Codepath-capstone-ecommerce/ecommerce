@@ -69,19 +69,9 @@ export default function UserAnalytics() {
           key: 'selection'
         }
       ]);
-
-      const handleOnSubmit = async () => {
-
-        const {data, error } = await apiClient.getWeeklyOrders(
-            {
-                start_date:dateRange[0].startDate,
-                end_date:dateRange[0].endDate
-            })
-        console.log(data)
-      }
     
     const range = dateRange[0].endDate.getDate() - dateRange[0].startDate.getDate() +1
-    const start = dateRange[0].startDate.getUTCDate()
+    const start = dateRange[0].startDate
     return (
         <div className={classes.root}>
             <Drawer
@@ -143,7 +133,7 @@ export default function UserAnalytics() {
                     className={classNames(classes.dateRange)}
                 />
                 <br></br>
-                <LineGraph />
+                <LineGraph range={range} dateRange={dateRange} start={start}/>
                 <br></br>
                 <br></br>
                 <Card className={classes.newCus}>
@@ -153,7 +143,6 @@ export default function UserAnalytics() {
                     <PersonRow />
                 </Card>
             </Box>
-            <Button onClick={handleOnSubmit}>View Range</Button>
         </div>
     )
 }

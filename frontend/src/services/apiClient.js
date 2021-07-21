@@ -33,6 +33,9 @@ class ApiClient {
     }
   }
 
+  async fetchProductByName(data){
+    return await this.request({ endpoint: 'products/byName', method: "POST", data:data})
+  }
   async getWeeklyOrders(data) {
     return await this.request({ endpoint: 'admin/weeklyorders', method: "POST", data:data})
   }
