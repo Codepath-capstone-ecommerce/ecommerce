@@ -54,8 +54,9 @@ class Order {
   static async fetchAllWorkingOrderDetail() {
     const result = await db.query(
       `
-          SELECT DISTINCT order_detail.order_id
+      SELECT DISTINCT ON (order_detail.order_id) order_detail.order_id, discount, created_at, delivery_address
           FROM order_detail
+          INNER JOIN orders ON order_detail.order_id = orders.id
           WHERE order_detail.completed = FALSE
           ORDER BY order_id ASC
          
