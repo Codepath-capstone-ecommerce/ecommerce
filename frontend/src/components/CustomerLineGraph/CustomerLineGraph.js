@@ -2,7 +2,7 @@ import { Line, Bar } from 'react-chartjs-2';
 import apiClient from '../../services/apiClient';
 import { useEffect, useState } from "react";
 
-export default function LineGraph({ range, dateRange, start }) {
+export default function CustomerLineGraph({ range, dateRange, start }) {
   const [data, setData] = useState([])
   const days = {
     1: 'Mon',
@@ -54,7 +54,7 @@ export default function LineGraph({ range, dateRange, start }) {
 
     const handleOnSubmit = async (startDate) => {
 
-      const { data, error } = await apiClient.getWeeklyOrders(
+      const { data, error } = await apiClient.getWeeklyCustomers(
         {
           start_date: startDate
         })
@@ -69,10 +69,9 @@ export default function LineGraph({ range, dateRange, start }) {
 
   let more = []
   for (let i =0; i<data.length;i++){
-    more.push(data[i]['orders'])
+    more.push(data[i]['customers'])
   }
 
-  
   let labels =[]
   if (range>7){
     start = start.getUTCDate()
@@ -91,12 +90,11 @@ export default function LineGraph({ range, dateRange, start }) {
     }
   }
 
-
   const state = {
     labels: (labels),
     datasets: [
       {
-        label: 'Sales',
+        label: 'Customers',
         backgroundColor: 'rgba(75,192,192,1)',
         lineTension: 0.5,
         borderColor: 'rgba(0,0,0,1)',
