@@ -38,9 +38,8 @@ router.post("/create", security.requireAuthenticatedUser, async (req, res, next)
   router.get("/detailByID", async (req, res, next) => {
     try {
       const user = res.locals.user
-      console.log("body: ",req.body)
-      console.log("params: ",req.params)
-      const orders = await Order.fetchOrderDetailById({ orderId: req.body.orderId })
+      let id = Number(req.query.orderId)
+      const orders = await Order.fetchOrderDetailById({ orderId: id })
       return res.status(200).json({ orders })
     } catch (err) {
       next(err)
