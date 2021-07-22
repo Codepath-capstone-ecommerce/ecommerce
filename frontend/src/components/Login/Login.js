@@ -34,7 +34,12 @@ export default function Login(){
         if (data?.user){
             setAppState((a) => (
                 {
-                    ...a, user: data.user,isAuthenticated: true
+                    ...a, 
+                    first_name: data.user.first_name,
+                    rewards:data.user.rewards,
+                    last_name:data.user.last_last,
+                    isAuthenticated: true,
+                    email:data.user.email
                 }
                 ))
           apiClient.setToken(data.token)

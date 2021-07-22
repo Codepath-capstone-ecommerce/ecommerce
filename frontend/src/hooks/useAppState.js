@@ -4,11 +4,14 @@ import apiClient from '../services/apiClient';
 export default function useAppState() {
   const [error, setError] = useState(null)
   const [appState, setAppState] = useState({
-    name: null,
+    first_name: "",
+    last_name:"",
+    email:"",
     isAuthenticated: false,
     cart: [],
     favorites:[],
     rewards: 0,
+    address:''
   })
   
 
@@ -20,9 +23,16 @@ export default function useAppState() {
     const fetchUser = async () => {
       const { data, error } = await apiClient.fetchUserFromToken()
       if (data) {
+        console.log(data.publicUser)
         setAppState((a) => (
           {
-            ...a, user: data.user, isAuthenticated: true
+            ...a, 
+            first_name: data.publicUser.first_name, 
+            last_name:data.publicUser.last_name,
+            email:data.publicUser.email,
+            rewards:data.publicUser.rewards,
+            isAuthenticated: true,
+            address:data.publicUser.address
           }
         ))
       }

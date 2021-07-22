@@ -1,6 +1,8 @@
 import { Button, Box } from "@material-ui/core"
 import { useNavigate, Link } from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
+import { useAppStateContext } from '../../contexts/appStateContext';
+import UserDrawer from "../UserDrawer/UserDrawer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function NavBar() {
+  const { appState} = useAppStateContext()
   const navigate = useNavigate()
   const classes = useStyles()
   return (
@@ -21,8 +24,12 @@ export default function NavBar() {
         <Button onClick={() => { navigate("/menu") }} variant="outlined">Menus</Button>
         <Button onClick={() => { navigate("/aboutUs") }} variant="outlined">Our Story</Button>
         <Button onClick={() => { navigate("/order") }} variant="outlined">Order Now</Button>
+        {appState.isAuthenticated?<UserDrawer></UserDrawer>:
         <Button onClick={() => { navigate("/login") }} variant="outlined" >Login</Button>
+        }
+        {appState.isAuthenticated?<div></div>:
         <Button onClick={() => { navigate("/signup") }} variant="outlined" >Sign Up</Button>
+        }
       </Box>
     </Box>
 

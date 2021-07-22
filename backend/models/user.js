@@ -5,12 +5,15 @@ const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 
 class User {
   static makePublicUser(user) {
+    console.log(user)
     return {
       id: user.id,
-      name: user.name,
+      first_name: user.first_name,
+      last_name:user.last_name,
+      rewards:user.rewards,
       email: user.email,
       isAdmin: user.is_admin,
-      createdAt: user.created_at,
+      address:user.address
     }
   }
 
@@ -53,12 +56,13 @@ class User {
     const hashedPassword = await bcrypt.hash(credentials.password, BCRYPT_WORK_FACTOR)
     const normalizedEmail = credentials.email.toLowerCase()
 
+    console.log(credentials.hasOwnProperty("address"))
     const userResult = await db.query(
-      `INSERT INTO users (password, email, first_name, last_name, is_admin)
-       VALUES ($1, $2, $3, $4, $5)
+      `INSERT INTO users (password, email, first_name, last_name, is_admin,address)
+       VALUES ($1, $2, $3, $4, $5,$6)
        RETURNING id, email, first_name, is_admin, created_at;
       `,
-      [ hashedPassword, normalizedEmail, credentials.first_name, credentials.last_name, credentials.is_admin]
+      [ hashedPassword, normalizedEmail, credentials.first_name, credentials.last_name, credentials.is_admin,credentials.address]
     )
     const user = userResult.rows[0]
 
