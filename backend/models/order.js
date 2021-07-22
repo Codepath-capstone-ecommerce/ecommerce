@@ -22,6 +22,7 @@ class Order {
   }
 
   static async fetchOrderDetailById(orderId) {
+    
     const result = await db.query(
       `
           SELECT order_detail.order_id AS "order_detail_id",
@@ -35,6 +36,17 @@ class Order {
     );
 
     return result.rows;
+  }
+
+  static async completeOrderDetail(orderId) {
+    
+    const query = `
+    UPDATE order_detail
+    SET completed = TRUE
+    WHERE order_detail.order_id  = $1`
+    const result = await db.query(query, [orderId.orderId])
+
+    return orderId.orderId + ": order has been updated!"
   }
 
   static async fetchAllOrderDetail() {
@@ -54,8 +66,9 @@ class Order {
   static async fetchAllWorkingOrderDetail() {
     const result = await db.query(
       `
-          SELECT DISTINCT order_detail.order_id
+      SELECT DISTINCT ON (order_detail.order_id) order_detail.order_id, discount, created_at, delivery_address
           FROM order_detail
+          INNER JOIN orders ON order_detail.order_id = orders.id
           WHERE order_detail.completed = FALSE
           ORDER BY order_id ASC
          
