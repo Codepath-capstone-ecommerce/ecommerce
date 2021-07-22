@@ -24,7 +24,7 @@ import { useEffect, useState } from "react";
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-
+import Divider from '@material-ui/core/Divider';
 import axios from "axios";
 
 function rand() {
@@ -39,15 +39,6 @@ function getModalStyle() {
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
   };
-}
-const fetchOrderByID = async (id) => {
-  
-  const { data, error } = await apiClient.getOrderByID(Number(id))
-  // console.log(data.nutrition)
-  // console.log(typeof(data.nutrition))
-  if(data){
-    console.log(data)
-    }
 }
 
 const theme = createTheme({
@@ -190,7 +181,7 @@ export default function VendorCurrentOrders() {
             flexWrap="wrap"
             p={1}
             // bgcolor="background.paper"
-            css={{ maxWidth: 300 }}
+            // css={{ maxWidth: 300 }}
             justifyContent = 'space-between'
             borderRadius={10}
           >
@@ -210,7 +201,7 @@ export default function VendorCurrentOrders() {
                   {product.quantity}
                 </Typography>
            </Box>
-           
+           <Divider></Divider>
           </Box>   
         </Grid>
       ))}

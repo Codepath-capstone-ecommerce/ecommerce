@@ -46,7 +46,7 @@ class Order {
     WHERE order_detail.order_id  = $1`
     const result = await db.query(query, [orderId.orderId])
 
-    return orderId.orderId + ": order has been updated!"
+    return "order " +orderId.orderId + " : has been updated!"
   }
 
   static async fetchAllOrderDetail() {
