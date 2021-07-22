@@ -46,6 +46,17 @@ router.post("/create", security.requireAuthenticatedUser, async (req, res, next)
     }
   })
 
+  router.post("/detailByID/complete", async (req, res, next) => {
+    try {
+      const user = res.locals.user
+      let id = Number(req.query.orderId)
+      const orders = await Order.completeOrderDetail({ orderId: id })
+      return res.status(200).json({ orders })
+    } catch (err) {
+      next(err)
+    }
+  })
+
  
 
 
