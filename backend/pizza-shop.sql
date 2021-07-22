@@ -6,4 +6,4 @@ CREATE DATABASE pizza_shop;
 \connect pizza_shop
 
 \i pizza-shop-schema.sql
--- \i student-store-seed.sql
+\i pizza-shop-seed.sql

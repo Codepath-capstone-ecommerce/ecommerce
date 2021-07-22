@@ -51,17 +51,17 @@ class Products {
     }
 
     static async fetchProductByName(productName) {
-        //console.log(productName)
         const result = await db.query(
         `
         SELECT products.id AS "productId",
-               products.name AS "name"
+               products.name AS "name",
+               products.image_url AS "img"
         FROM products
         WHERE products.name LIKE $1
         `,
             [productName]
         )
-       // console.log(result.rows)
+    //    console.log(result.rows)
 
         return result.rows
     }
