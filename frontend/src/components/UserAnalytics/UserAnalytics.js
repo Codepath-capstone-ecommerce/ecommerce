@@ -10,6 +10,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import BarGraph from "../BarGraph/BarGraph";
 import LineGraph from "../LineGraph/LineGraph";
 import classNames from "classnames";
+import CustomerLineGraph from "../CustomerLineGraph/CustomerLineGraph";
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ReportIcon from '@material-ui/icons/Report';
 import PersonRow from "../PersonRow/PersonRow";
@@ -62,6 +63,10 @@ const useStyles = makeStyles((theme) => ({
 export default function UserAnalytics() {
     const [selectedDate, handleDateChange] = useState(new Date());
     const classes = useStyles();
+    const [graphState,setGraphState] = useState({
+        customers:false,
+        orders:true
+    })
     const [dateRange, setDateRange] = useState([
         {
           startDate: new Date(),
@@ -70,6 +75,16 @@ export default function UserAnalytics() {
         }
       ]);
     
+    const showGraph = () => {
+        setGraphState((a) => (
+            {
+                customers:!a.customers,
+                orders:!a.orders
+            }
+            ))
+    }
+
+    console.log(graphState)
     const range = dateRange[0].endDate.getDate() - dateRange[0].startDate.getDate() +1
     const start = dateRange[0].startDate
     return (
@@ -107,13 +122,13 @@ export default function UserAnalytics() {
                     <Card className={classes.card}>
                         <CardContent className={classes.cardcontent}>
                             <AttachMoneyIcon />
-                            <Typography>Sales</Typography>
+                            <Button onClick={showGraph}>Sales</Button>
                         </CardContent>
                     </Card>
                     <Card className={classes.card}>
                         <CardContent className={classes.cardcontent}>
                             <PeopleIcon />
-                            <Typography>Clients</Typography>
+                            <Button onClick={showGraph}>Clients</Button>
                         </CardContent>
                     </Card>
                     <Card className={classes.card}>
@@ -133,7 +148,8 @@ export default function UserAnalytics() {
                     className={classNames(classes.dateRange)}
                 />
                 <br></br>
-                <LineGraph range={range} dateRange={dateRange} start={start}/>
+                {graphState.orders?<LineGraph range={range} dateRange={dateRange} start={start}/>:
+                <CustomerLineGraph range={range} dateRange={dateRange} start={start}/>}
                 <br></br>
                 <br></br>
                 <Card className={classes.newCus}>
