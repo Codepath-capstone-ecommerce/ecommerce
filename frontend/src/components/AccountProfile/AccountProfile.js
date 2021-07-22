@@ -20,12 +20,13 @@ const useStyles = makeStyles(() => ({
 }));
 export default function AccountProfile() {
     const { appState} = useAppStateContext()
+    // console.log(appState)
     const classes = useStyles()
     return (
         <div>
             <NavBar></NavBar>
             <Box className={classes.root}>
-                <Typography variant="h1" component="h2">Hey, {appState.name}!</Typography>
+                <Typography variant="h1" component="h2">Hey, {appState.first_name}!</Typography>
                 <Typography>Welcome to your account dashboard</Typography>
             </Box>
             <br></br>
@@ -41,9 +42,9 @@ export default function AccountProfile() {
                 
                     <Card>
                         <Box p={4}>
-                            <Box width={75}>
-                                <Typography>{appState.name}</Typography>
-                                <Typography>{appState.user.email}</Typography>
+                            <Box>
+                                <Typography>{appState.first_name} {appState.last_name}</Typography>
+                                <Typography>{appState.email}</Typography>
                                 <Link>Edit</Link>
                             </Box>
                         </Box>
@@ -55,7 +56,13 @@ export default function AccountProfile() {
                 <Typography variant="h5">Saved Addresses </Typography>
                 <Card>
                     <Box p ={3}>
+                        {appState.address?<Typography>{appState.address}</Typography>:
                         <Typography>You don't have any saved addresses</Typography>
+                        }
+                        {appState.address?<Link>Edit</Link>:
+                        <div></div>
+                        }
+                        
                     </Box>                
                 </Card>
             </Box>
@@ -77,15 +84,15 @@ export default function AccountProfile() {
                     <Box className={classes.box}>
                         <FormGroup>
                             <FormControlLabel
-                                control={<Checkbox name="checkedA" />}
+                                control={<Checkbox name="checkedA" color="primary"/>}
                                 label="Send Offers"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="checkedB" />}
+                                control={<Checkbox name="checkedB" color="primary"/>}
                                 label="Push Notifications"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="checkedB" />}
+                                control={<Checkbox name="checkedB" color="primary"/>}
                                 label="Order Receipts"
                             />
                         </FormGroup>
