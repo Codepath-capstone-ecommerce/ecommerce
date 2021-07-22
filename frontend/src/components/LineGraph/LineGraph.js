@@ -1,4 +1,4 @@
-import { Line } from 'react-chartjs-2';
+import { Line, Bar } from 'react-chartjs-2';
 import apiClient from '../../services/apiClient';
 import { useEffect, useState } from "react";
 
@@ -72,7 +72,7 @@ export default function LineGraph({ range, dateRange, start }) {
     more.push(data[i]['orders'])
   }
 
-  console.log(start)
+  
   let labels =[]
   if (range>7){
     start = start.getUTCDate()
@@ -91,8 +91,6 @@ export default function LineGraph({ range, dateRange, start }) {
     }
   }
 
-  console.log(labels)
-
 
   const state = {
     labels: (labels),
@@ -109,7 +107,7 @@ export default function LineGraph({ range, dateRange, start }) {
   }
   return (
     <div>
-      <Line
+      <Bar
         data={state}
         options={{
           title: {
