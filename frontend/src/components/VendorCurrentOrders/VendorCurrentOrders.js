@@ -21,6 +21,9 @@ import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Slide from '@material-ui/core/Slide';
 import { useEffect, useState } from "react";
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 import axios from "axios";
 
@@ -121,9 +124,10 @@ export default function VendorCurrentOrders() {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-  const [modalTitle, setModalTitle] = useState('')
   const [modalId, setModalId] = useState("")
-  const [currentID, setCurrentID] = useState(0)
+  const [products, setProducts] = useState([])
+
+  
   
   const handleOpen = () => {
     setOpen(true);
@@ -138,23 +142,15 @@ export default function VendorCurrentOrders() {
   useEffect(() => {
     // action on update of modal
     const fetchOrderDetails = async () => {
-      let jsonData = {"orderId": 14}
-      try {
-        const response = await axios.get(`http://localhost:3001/order/detailByID`, {
-            method: 'GET',
-            body: JSON.stringify({
-              orderId: 14
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-          console.log(response)
-       // console.warn(response.data);
-    } catch (error) {
-        console.warn(error);
-    }
-     
+
+      const res = await axios.get('http://localhost:3001/order/detailByID', {
+         params: 
+         { 
+           orderId: modalId
+           } });
+      if(res.data?.orders){setProducts(res.data.orders)}
+       //console.log(res.data.orders) //array of products
+      if(modalId !== '') {handleOpen()}
     }
   
       fetchOrderDetails()
@@ -164,23 +160,66 @@ export default function VendorCurrentOrders() {
   
 
    const  handleIconClicks = (id) => {
-    // setCurrentID(modalId)
-    setModalId(id)
-    handleOpen()
-    console.log(id)
+
+    if(modalId === id){
+      handleOpen() // no change needed just open current modal
+    }
+    else{
+      setModalId(id) // change id and useEffect will auto change and open
+    }
+    
 }
   
   const handleClick = value => console.log(value);
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal ID: {modalId}</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
+      <Typography id="simple-modal-title" align="center" className={classNames(classes.title)} >
+      Order ID: {modalId}
+        </Typography>
+      <Grid 
+       container
+       direction="row"
+       spacing={10}
+       alignItems="center"
+       >
+      {products.map((product, index) => (
+         <Grid key={index} item >
+           <Box
+            display="flex"
+            flexWrap="wrap"
+            p={1}
+            // bgcolor="background.paper"
+            css={{ maxWidth: 300 }}
+            justifyContent = 'space-between'
+            borderRadius={10}
+          >
+            <Box p={1} borderRadius={10}>
+              <Typography align="center" className={classNames(classes.subTitle)} >
+                Product  
+                </Typography>
+                <Typography align="center" className={classNames(classes.subTitle)} >
+                  {product.product_id}
+                </Typography>
+           </Box>
+           <Box p={1}  borderRadius={10}>
+              <Typography align="center" className={classNames(classes.subTitle)} >
+                  Quantity  
+                </Typography>
+                <Typography align="center" className={classNames(classes.subTitle)} >
+                  {product.quantity}
+                </Typography>
+           </Box>
+           
+          </Box>   
+        </Grid>
+      ))}
+      </Grid>
     </div>
   );
-
+{/* <Box width="100%">Item 1</Box>
+<Box flexShrink={1}>Item 2</Box>
+<Box flexShrink={0}>Item 3</Box> */}
   return (
     <div className={classes.root}>
      
