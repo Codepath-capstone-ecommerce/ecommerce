@@ -16,9 +16,8 @@ router.post("/weeklyorders", async (req, res, next) => {
 
 router.post("/weeklycustomers", async (req, res, next) => {
   try {
-    const customers = await User.register({ ...req.body, is_admin: false })
-    const token = createUserJwt(user)
-    return res.status(201).json({ user, token })
+    const customers = await Admin.grabWeeklyCustomer(req.body)
+    return res.status(201).json({ customers })
   } catch (err) {
     next(err)
   }
