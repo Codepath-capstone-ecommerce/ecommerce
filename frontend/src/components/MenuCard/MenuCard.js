@@ -8,6 +8,7 @@ import { Link } from "react-router-dom"
 //write function that can send products to a cart once buttons are clicked
 export default function MenuCard({ product }) {
     const { appState, setAppState } = useAppStateContext()
+    // console.log(appState)
     const [quantity, setQuantity] = useState(0);
 
     const increment = () => {
@@ -35,7 +36,7 @@ export default function MenuCard({ product }) {
     return (
         <Card >
             <Box display="flex" flexDirection="column" p={5}>
-                <img src={`${product.image}`} alt={`${product.name}`}></img>
+                <img src={`${product.image}`} alt={`${product.name}`} width={150} height={130}></img>
                 <br></br>
                 <Box>
                     <Box display="flex" flexDirection="column">
@@ -45,14 +46,14 @@ export default function MenuCard({ product }) {
                         <span>Calories: {`${product.cals}`}</span>
                         <br></br>
                     </Box>
-                    <Box display="flex" flexDirection="row" justifyContent="center">
+                    {appState.first_name?<Box display="flex" flexDirection="row" justifyContent="center">
                         <input type="image" onClick={increment} id="image" height="25px" width="25px" alt="plus sign" src={plus_sign}></input>
                         <Typography>{quantity}</Typography>
                         <input type="image" onClick={decrement} id="image" height="25px" width="25px" alt="minus sign" src={minus_sign}></input>
-                    </Box>
+                    </Box>:<div></div>}
                     <br></br>
                     {/* Have a terninary operator to only have cart function if a user is logged in */}
-                    <Button variant="outlined" onClick={addToCart}>Add to Cart</Button>
+                    {appState.first_name?<Button variant="outlined" onClick={addToCart}>Add to Cart</Button>:<div></div>}
                 </Box>
             </Box>
         </Card>
