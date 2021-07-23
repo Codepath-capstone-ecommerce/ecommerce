@@ -22,7 +22,6 @@ class Order {
   }
 
   static async fetchOrderDetailById(orderId) {
-    
     const result = await db.query(
       `
           SELECT order_detail.order_id AS "order_detail_id",
@@ -32,14 +31,13 @@ class Order {
           FROM order_detail
           WHERE order_detail.order_id = $1
         `,
-      [orderId.orderId]
+      [orderId]
     );
 
     return result.rows;
   }
 
   static async completeOrderDetail(orderId) {
-    
     const query = `
     UPDATE order_detail
     SET completed = TRUE
