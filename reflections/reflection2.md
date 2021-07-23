@@ -5,7 +5,7 @@
  - We faced some issues with updating vendor state when a admin completes an order but we managed to fix it! Also, creating the user analyitics page was super challenging by making it modular with the date range picker allowing to filter dates. Lastly, overall making sure everything works together was challenging and fun!
 
 - Did you finish all of your tasks in your sprint plan for this week? If you did not finish all of the planned tasks what were some factors that contributed to this? (i.e over planned, did not know how to implement certain features, miscommunication from the team, had to pivot from original plans, etc.)
- - For the most part we finished everything that we needed to do. The only thing that we still need to do is the showing the past orders for the vendor with filtering of dates.
+ - For the most part we finished everything that we needed to do. The only thing that we still need to do is the showing the past orders for the vendor with filtering of dates. The reason we did not get to the vendor showing past orders, was because it got challeneing to make the current orders display correctly and modular with updating a modal with every order.
 
 - Did the resources provided to you help prepare you in planning and executing your capstone project sprint this week? Be specific, what resources did you find particularly helpful or which tasks did you need more support on?
  - Our pod sync was helpful and having our mentors give feedback on our goals was useful! When we had our meeting togother on friday, that really cleared things up for connecting the frontend with the backend. 
