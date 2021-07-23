@@ -2,6 +2,7 @@ import { Typography, LinearProgress, Box, Link, Divider, Card, CardMedia, Button
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar"
+import { useAppStateContext } from '../../contexts/appStateContext';
 
 const BorderLinearProgress = withStyles((theme) => ({
     root: {
@@ -18,6 +19,8 @@ const BorderLinearProgress = withStyles((theme) => ({
 }))(LinearProgress);
 
 export default function Rewards() {
+    const { appState } = useAppStateContext()
+    appState.rewards = 28
     const [tab,setTab] = useState({
         rewards:true,
         orders:false,
@@ -57,16 +60,16 @@ export default function Rewards() {
                             HEY,
                         </Typography>
                         <Typography variant="h4">
-                            Charles Lam
+                            {appState.first_name} {appState.last_name}
                         </Typography>
                     </Box>
                     <Typography variant="h4">
-                        15/30
+                        {appState.rewards}/30
                     </Typography>
                 </Box>
 
                 <Box px="auto" pt={5}>
-                    <BorderLinearProgress variant="determinate" value={50} />
+                    <BorderLinearProgress variant="determinate" value={(appState.rewards/30)*100} />
                 </Box>
 
                 <br></br>
