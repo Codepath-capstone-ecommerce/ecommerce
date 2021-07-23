@@ -56,15 +56,11 @@ export default function UserDrawer() {
     );
 
     return (
-        <div>
-            {['right'].map((anchor) => (
-                <React.Fragment key={appState.first_name}>
-                    <Button onClick={toggleDrawer(anchor, true)} variant="outlined">{appState.first_name}</Button>
-                    <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-                        {list(anchor)}
-                    </Drawer>
-                </React.Fragment>
-            ))}
-        </div>
+        <React.Fragment key={appState.first_name}>
+            <Button onClick={toggleDrawer('right', true)} variant="outlined">{appState.first_name}</Button>
+            <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
+                {list('right')}
+            </Drawer>
+        </React.Fragment>
     );
 }
