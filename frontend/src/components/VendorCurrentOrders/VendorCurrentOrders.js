@@ -111,7 +111,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function VendorCurrentOrders() {
-  const { vendorState } = useAppStateContext();
+  const { vendorState, setvendorState } = useAppStateContext();
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
@@ -128,6 +128,7 @@ export default function VendorCurrentOrders() {
   function preventDefault(event) {
     event.preventDefault();
   }
+
   useEffect(() => {
     // action on update of modal
     const fetchOrderDetails = async () => {
@@ -136,6 +137,7 @@ export default function VendorCurrentOrders() {
           orderId: modalId,
         },
       });
+      //const res = await apiClient.getOrderByID(modalId)
       if (res.data?.orders) {
         setProducts(res.data.orders);
       }
@@ -156,7 +158,19 @@ export default function VendorCurrentOrders() {
     }
   };
 
-  const handleClick = (value) => console.log(value);
+  const handleClickCompleteOrder = async (id) => {
+   let json = {"orderId" : id}
+   const res = await apiClient.completeOrderDetailByID(json)
+   console.log(res.data?.orders)
+   setvendorState( (vendorState) => ( {
+     //will need to do the same when adding new orders, except add to the vendor state, instead of filtering.
+    currentOrders: vendorState.currentOrders.filter(order =>(
+      order.order_id !== id //filtering, if id matches throw it out, otherwise keep all orders
+    ))
+   }))
+   console.log(vendorState.currentOrders)
+  };
+
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -264,6 +278,7 @@ export default function VendorCurrentOrders() {
                     </TableCell>
                     <TableCell align="center">
                       <Button
+                        onClick={() => handleClickCompleteOrder(order.order_id)}
                         variant="contained"
                         color="primary"
                         style={{ height: 30 }}
