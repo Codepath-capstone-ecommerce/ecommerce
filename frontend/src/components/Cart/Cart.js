@@ -4,18 +4,24 @@ import apiClient from '../../services/apiClient';
 import { useState, useEffect } from "react"
 import axios from "axios"
 import CartCard from '../CartCard/CartCard';
+import NavBar from '../NavBar/NavBar';
 
 export default function Cart() {
-    const { appState } = useAppStateContext()
+    const { appState, setAppState, vendorState, setvendorState } = useAppStateContext()
     const [isCartFilled, setCart] = useState(false)
     
     // if (appState.cart.length !==0){
     //     setCart(true)
     // }
 
-    // const emptyCart = () =>{
-    //     setCart(false)
-    // }
+    const emptyCart = () =>{
+        setAppState((a) => (
+            {
+              ...a,
+              cart:[]
+            }
+          ))
+    }
 
     const formatCart = () => {
         const obj = {}
@@ -43,8 +49,9 @@ export default function Cart() {
         cart.push(obj);
     }
 
+    
     const createOrder = async () => {
-        console.log(cart)
+        // console.log(cart)
         const { data, error } = await apiClient.createOrder(
             {
                 "cart": {
@@ -53,10 +60,14 @@ export default function Cart() {
                 }
             }
         )
+        console.log(data)
+        // setvendorState(oldState => ({ currentOrders: [...oldState.currentOrders, data.orderDetail[0]] }))
+        emptyCart()
         // if (error){
         //   setErrors((e) => ({ ...e, form:error}))
         // }
     }
+
     // <Card key={idx}>
 //     <CardContent>
 //     <Typography>Item: {item.name}</Typography>
@@ -67,12 +78,13 @@ export default function Cart() {
 
     return (
         <div>
+            <NavBar></NavBar>
             <Typography>Your Cart</Typography>
             {items.length === 0 ? "Cart is empty" : items.map((item, idx) => (
                 <CartCard product={item}></CartCard>
             ))}
             <Button onClick={createOrder}>Place Order</Button>
-            <Button>Clear Cart</Button>
+            <Button onClick={emptyCart}>Clear Cart</Button>
         </div>
 
 
