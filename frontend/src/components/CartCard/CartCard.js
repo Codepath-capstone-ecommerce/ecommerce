@@ -15,7 +15,6 @@ export default function CartCard({ product }) {
         const fetchData = async () => {
             try {
                 const productRes = await apiClient.fetchProductByName({productName:product})
-                console.log(productRes.data.productResponse[0])
                 if (productRes?.data?.productResponse[0].img) {
                     setImg(productRes.data.productResponse[0].img)
                 }
@@ -33,7 +32,7 @@ export default function CartCard({ product }) {
     return (
         <Card>
             <CardContent>
-                <img src={img}></img>
+                <img src={img} width={100} height={100} alt={product.name}></img>
                 <Typography>Item: {product.name}</Typography>
                 <Typography>Quantity: {product.quantity}</Typography>
             </CardContent>
