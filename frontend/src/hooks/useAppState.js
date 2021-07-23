@@ -59,7 +59,7 @@ export default function useAppState() {
       if (error) setError(error)
     }
     fetchOrders()
-  }, [vendorState.currentOrders])
+  }, [])
 
   // useEffect(() => {
   //   const fetchCart = async () => {
