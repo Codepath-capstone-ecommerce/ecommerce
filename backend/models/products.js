@@ -55,7 +55,8 @@ class Products {
         `
         SELECT products.id AS "productId",
                products.name AS "name",
-               products.image_url AS "img"
+               products.image_url AS "img",
+               products.price AS "price"
         FROM products
         WHERE products.name LIKE $1
         `,

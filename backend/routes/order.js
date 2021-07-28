@@ -9,7 +9,7 @@ router.post("/create", security.requireAuthenticatedUser, async (req, res, next)
       const user = res.locals.user
       const cartResponse = await Order.createOrder({user, cart: req.body})
       const orderDetail = await Order.createOrderDetail({ order: cartResponse, user, cart: req.body})
-      return res.status(200).json({ orderDetail: orderDetail })
+      return res.status(200).json({ order_id:cartResponse[0].orderId, delivery_address:cartResponse[0].delivery_address, created_at:orderDetail[0].created_at})
     } catch (err) {
       next(err)
     }
