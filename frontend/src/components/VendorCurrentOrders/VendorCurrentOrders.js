@@ -27,12 +27,10 @@ import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
 import axios from "axios";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
+
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50
+  const left = 50
 
   return {
     top: `${top}%`,
@@ -106,9 +104,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 export default function VendorCurrentOrders() {
   const { vendorState, setvendorState } = useAppStateContext();
@@ -168,9 +163,8 @@ export default function VendorCurrentOrders() {
       order.order_id !== id //filtering, if id matches throw it out, otherwise keep all orders
     ))
    }))
-   console.log(vendorState.currentOrders)
-  };
 
+  }
 
   const body = (
     <div style={modalStyle} className={classes.paper}>

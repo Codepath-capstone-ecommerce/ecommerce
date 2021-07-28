@@ -6,12 +6,27 @@ import UserDrawer from "../UserDrawer/UserDrawer";
 import apiClient from '../../services/apiClient';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
+import classnames from 'classnames';
+import { white } from "color-name";
+import './NavBar.css'; 
+import pizzaImg from "../../assets/pizza.png"
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
+      backgroundColor: "#fffff"
     },
   },
+  customButton: {
+    border: "3px solid",
+    borderColor: "#2EDBFD !important",
+    backgroundColor: "#000000",
+    color: "white !important",
+    "&:hover": {
+      color: "black !important",
+      backgroundColor: "#2EDBFD",
+    }
+  }
 }));
 
 
@@ -29,25 +44,27 @@ export default function NavBar() {
 
   }
   return (
-    <Box display="flex" justifyContent="space-between" m={3} px={15}>
-      <img src="http://codepath-lifetracker.surge.sh/static/media/codepath.70a9a31f.svg" alt="logo" width="40px" height="40px"></img>
+    <Box display="flex" justifyContent="space-between" mt={1} px={5}>
+      <Link to={"/"}>
+      <img src={pizzaImg} id="pizza" alt="logo" ></img>
+      </Link>
       <Box className={classes.root}>
-        <Button onClick={() => { navigate("/menu") }} variant="outlined">Menus</Button>
-        <Button onClick={() => { navigate("/aboutUs") }} variant="outlined">Our Story</Button>
-        <Button onClick={() => { navigate("/order") }} variant="outlined">Order Now</Button>
+        <Button onClick={() => { navigate("/menu") }} variant="outlined" className={classnames(classes.customButton, "glow-button")}>Menus</Button>
+        <Button onClick={() => { navigate("/aboutUs") }} variant="outlined" className={classnames(classes.customButton, "glow-button")}>Our Story</Button>
+        <Button onClick={() => { navigate("/order") }} variant="outlined" className={classnames(classes.customButton, "glow-button")}>Order Now</Button>
         {appState.isAuthenticated ? <UserDrawer></UserDrawer> :
-          <Button onClick={() => { navigate("/login") }} variant="outlined" >Login</Button>
+          <Button onClick={() => { navigate("/login") }} variant="outlined" className={classnames(classes.customButton, "glow-button")} >Login</Button>
         }
         {appState.isAuthenticated ? 
         <>
-        <Button onClick={emptyUser} variant="outlined">Log Out</Button> 
+        <Button onClick={emptyUser} variant="outlined" className={classnames(classes.customButton, "glow-button")}>Log Out</Button> 
         <IconButton onClick={() => { navigate("/cart") }}>
           <Badge badgeContent={appState.cart.length} color="primary">
             <ShoppingCartIcon></ShoppingCartIcon>
           </Badge>
         </IconButton>
         </>:
-          <Button onClick={() => { navigate("/signup") }} variant="outlined" >Sign Up</Button>
+          <Button onClick={() => { navigate("/signup") }} variant="outlined" className={classnames(classes.customButton, "glow-button")}>Sign Up</Button>
         }
       </Box>
     </Box>

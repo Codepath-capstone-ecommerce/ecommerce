@@ -18,7 +18,8 @@ export default function useAppState() {
   
 
   const [vendorState, setvendorState] = useState({
-    currentOrders: []
+    currentOrders: [],
+    pastOrders : []
   })
 
   useEffect(() => {
@@ -60,7 +61,19 @@ export default function useAppState() {
       }
       if (error) setError(error)
     }
+    const fetchPastOrders = async () => {
+      const { data, error } = await apiClient.getPastOrders()
+      if (data) {
+        setvendorState((a) => (
+          {
+            ...a, pastOrders: data.orders
+          }
+        ))
+      }
+      if (error) setError(error)
+    }
     fetchOrders()
+    fetchPastOrders()
   }, [])
 
   // useEffect(() => {
