@@ -10,6 +10,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useAppStateContext } from '../../contexts/appStateContext';
+import { useNavigate, Link } from "react-router-dom"
 
 const useStyles = makeStyles({
     list: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles({
 export default function UserDrawer() {
     const { appState } = useAppStateContext()
     const classes = useStyles();
+    const navigate = useNavigate()
     const [state, setState] = React.useState({
         right: false,
     });
@@ -35,6 +37,14 @@ export default function UserDrawer() {
         setState({ ...state, [anchor]: open });
     };
 
+    const myRewards = () => {
+        navigate("/rewards")
+    }
+
+    const myAccount = () => {
+        navigate("/accountProfile")
+    }
+
     const list = (anchor) => (
         <div
             className={clsx(classes.list, {
@@ -45,12 +55,16 @@ export default function UserDrawer() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['My Rewards', 'My Profile'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <AttachMoneyIcon /> : <AccountCircleIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
+                    <ListItem button key="My Rewards">
+                        <ListItemIcon><AttachMoneyIcon /> </ListItemIcon>
+                        <Button onClick={myRewards} >My Rewards</Button>
+                        {/* <ListItemText primary={text} /> */}
                     </ListItem>
-                ))}
+                    <ListItem button key="My Profile">
+                        <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+                        <Button onClick={myAccount} >My Profile</Button>
+                        {/* <ListItemText primary={text} /> */}
+                    </ListItem>
             </List>
         </div>
     );
