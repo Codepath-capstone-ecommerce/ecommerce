@@ -1,9 +1,10 @@
-import { Button, Box } from "@material-ui/core"
+import { Button, Box, IconButton, Badge } from "@material-ui/core"
 import { useNavigate, Link } from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
 import { useAppStateContext } from '../../contexts/appStateContext';
 import UserDrawer from "../UserDrawer/UserDrawer";
 import apiClient from '../../services/apiClient';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +38,15 @@ export default function NavBar() {
         {appState.isAuthenticated ? <UserDrawer></UserDrawer> :
           <Button onClick={() => { navigate("/login") }} variant="outlined" >Login</Button>
         }
-        {appState.isAuthenticated ? <Button onClick={emptyUser} variant="outlined">Log Out</Button> :
+        {appState.isAuthenticated ? 
+        <>
+        <Button onClick={emptyUser} variant="outlined">Log Out</Button> 
+        <IconButton onClick={() => { navigate("/cart") }}>
+          <Badge badgeContent={appState.cart.length} color="primary">
+            <ShoppingCartIcon></ShoppingCartIcon>
+          </Badge>
+        </IconButton>
+        </>:
           <Button onClick={() => { navigate("/signup") }} variant="outlined" >Sign Up</Button>
         }
       </Box>
