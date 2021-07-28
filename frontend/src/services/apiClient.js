@@ -49,6 +49,10 @@ class ApiClient {
     return await this.request({endpoint:'order/current', method:"GET"})
   }
 
+  async getPastOrders(){
+    return await this.request({endpoint:'order/past', method:"GET"})
+  }
+
   async completeOrderDetailByID(data) {
     console.log(data)
     return await this.request({ endpoint: 'order/detailByID/complete', method: "POST", data:data})
