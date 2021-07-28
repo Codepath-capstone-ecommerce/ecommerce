@@ -10,7 +10,9 @@ import Menu from '../Menu/Menu';
 import Login from '../Login/Login'
 import SignUp from "../SignUp/SignUp"
 import Cart from '../Cart/Cart';
+import PaymentForm from '../PaymentForm/PaymentForm';
 import { AppStateProvider} from "../../contexts/appStateContext"
+import CheckOut from '../CheckOut/CheckOut';
 
 export default function AppContainer(){
   return(
@@ -23,8 +25,10 @@ export default function AppContainer(){
 function App() {
   return (
     <div className="App">
+      {/* <PaymentForm></PaymentForm> */}
       <BrowserRouter>
       <Routes>
+        <Route path="/checkout" element={<CheckOut/>}/>
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/login" element={<Login/>}/>
