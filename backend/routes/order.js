@@ -35,6 +35,16 @@ router.post("/create", security.requireAuthenticatedUser, async (req, res, next)
     }
   })
 
+  router.get("/past", async (req, res, next) => {
+    try {
+      const user = res.locals.user
+      const orders = await Order.fetchAllPastOrderDetail()
+      return res.status(200).json({ orders })
+    } catch (err) {
+      next(err)
+    }
+  })
+
   router.get("/detailByID", async (req, res, next) => {
     try {
       const user = res.locals.user
