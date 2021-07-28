@@ -21,12 +21,16 @@ export default function MenuCard({ product }) {
         }
     }
 
+    let obj = {}
+    obj[product.name] = product.price
+
     const addToCart = () => {
 
         for (let i = 0; i < quantity; i++) {
             setAppState((a) => (
                 {
-                    ...a, cart: [...a.cart, product.name]
+                    ...a, 
+                    cart: [...a.cart, product.name]
                 }
             ))
         }
@@ -53,7 +57,7 @@ export default function MenuCard({ product }) {
                     </Box>:<div></div>}
                     <br></br>
                     {/* Have a terninary operator to only have cart function if a user is logged in */}
-                    {appState.first_name?<Button variant="outlined" onClick={addToCart}>Add to Cart</Button>:<div></div>}
+                    {appState.first_name?<Button variant="outlined" disabled={quantity === 0} onClick={addToCart}>Add to Cart</Button>:<div></div>}
                 </Box>
             </Box>
         </Card>
