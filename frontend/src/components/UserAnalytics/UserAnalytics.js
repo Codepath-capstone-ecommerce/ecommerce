@@ -15,6 +15,10 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import ReportIcon from '@material-ui/icons/Report';
 import PersonRow from "../PersonRow/PersonRow";
 import { DateRangePicker } from 'react-date-range'; // date range
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+
+
 import apiClient from '../../services/apiClient';
 
 const drawerWidth = 240;
@@ -142,7 +146,7 @@ export default function UserAnalytics() {
                     onChange={item => setDateRange([item.selection])}
                     showSelectionPreview={true}
                     moveRangeOnFirstSelection={false}
-                    months={2}
+                    months={1}
                     ranges={dateRange}
                     direction="horizontal"
                     className={classNames(classes.dateRange)}
