@@ -1,12 +1,13 @@
 import MenuCard from "../MenuCard/MenuCard"
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { Button, colors, ListItem, ListItemText, List, Card } from "@material-ui/core"
+import { Button, colors, ListItem, ListItemText, List, Card, CardActions, Box } from "@material-ui/core"
 import { Grid } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import NavBar from "../NavBar/NavBar"
 import { useNavigate } from "react-router-dom";
 import { useAppStateContext } from '../../contexts/appStateContext';
+import apiClient from '../../services/apiClient';
 
 
 //class should import appstate that contains products
@@ -17,9 +18,38 @@ export default function Menu() {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [products, setProduct] = useState([])
-
+    const [active, setActive] = useState({
+        "Pizza":false,
+        "Drink":false,
+        "misc":false
+    })
+    const categories = ['Pizza', 'Drink', 'misc']
     const checkout = () => {
         navigate('/cart')
+    }
+
+    const getCat = (e) => {
+        let obj = {}
+        for (const [key, value] of Object.entries(active)) {
+            if( key === e.target.innerHTML){
+                obj[key] = true
+            }
+            else{
+                obj[key] = false
+            }
+        }
+        setActive(obj)
+        const fetchData = async () => {
+            try {
+                const productRes = await apiClient.fetchProductsByCategory({ category: e.target.innerHTML })
+                if (productRes?.data?.products) {
+                    setProduct(productRes.data.products)
+                }
+            } catch (err) {
+                setError(err)
+            }
+        }
+        fetchData()
     }
 
     useEffect(() => {
@@ -40,57 +70,42 @@ export default function Menu() {
         }
 
         fetchData()
-        // if(products.length){
-        //     for(let i =0;i<products.length;i++){
-        //         let obj = {}
-        //         obj[products[i].name]=products[i].price
-        //         setAppState((a)=>({
-        //             ...a,
-        //             prices: [...a.prices,obj]
-        //         }))
-        //     }
-        // }
     }, [])
-
+    
     return (
         <div>
             <NavBar></NavBar>
             <br></br>
-            <List>
-                <Card>
-                    <ListItem>
-                        <ListItemText>
-                            Pizzas
-                        </ListItemText>
-                    </ListItem>
-                </Card>
-                <Card>
-                    <ListItem>
-                        <ListItemText>
-                            Drinks
-                        </ListItemText>
-                    </ListItem>
-                </Card>
-                <Card>
-                    <ListItem>
-                        <ListItemText>
-                            Desserts
-                        </ListItemText>
-                    </ListItem>
-                </Card>
-
-
-            </List>
-            <Grid
-                container
-                direction="row"
-                spacing={10}
-                alignItems="center"
-                justify="space-evenly"
-            >
-                {products.map((product, idx) => (
-                    <MenuCard product={product} key={idx} />
-                ))}
+            <Grid container justifyContent="space-around">
+                <Grid item xs={3}>
+                    {categories.map((cat, idx) => (
+                        <Box my={2}>
+                            <Card key={idx}>
+                                {active.cat ?
+                                    <CardActions style={{ backgroundColor: "#2ed9fb" }}>
+                                        <Button onClick={getCat}>{cat}</Button>
+                                    </CardActions> :
+                                    <CardActions>
+                                        <Button onClick={getCat}>{cat}</Button>
+                                    </CardActions>}
+                                {/* <CardActions style={{backgroundColor: "#2ed9fb"}}>
+                                    <Button onClick={getCat}>{cat}</Button>
+                                </CardActions> */}
+                            </Card>
+                        </Box>
+                    ))}
+                </Grid>
+                <Grid
+                    item
+                    xs={8}
+                    container
+                >
+                    {products.map((product, idx) => (
+                        <Box mx={2}>
+                            <MenuCard product={product} key={idx} />
+                        </Box>
+                    ))}
+                </Grid>
             </Grid>
         </div>
 

@@ -1,11 +1,11 @@
-import minus_sign from "../../assets/minus_sign.svg"
-import plus_sign from "../../assets/plus_sign.svg"
-import { Card, Typography, Box, Button, CardContent, CardMedia } from "@material-ui/core"
+import { Card, Typography, Box, Button, CardContent, CardMedia, Grid, IconButton } from "@material-ui/core"
 import { useAppStateContext } from '../../contexts/appStateContext';
 import apiClient from '../../services/apiClient';
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 //write function that can send products to a cart once buttons are clicked
 export default function CartCard({ product }) {
@@ -17,7 +17,10 @@ export default function CartCard({ product }) {
     const check = appState.review[appState.review.findIndex(products => products.name === product.name)]
     const initialize = check ? check.quantity : product.quantity
     const [quantity, setQuantity] = useState(initialize);
+    const [total,setTotal] = useState(appState.cart.length)
 
+    // console.log(product)
+    // console.log(appState.review)
 
     const increment = () => {
         setQuantity((q) => (q + 1))
@@ -30,35 +33,57 @@ export default function CartCard({ product }) {
         }
     }
 
+    //fix bug with add more items from the cart
+    useEffect(() => {
+        const updateCart = () => {
+            let newCart = []
+            console.log(appState.review)
+            for (let i = 0; i < appState.review.length; i++) {
+                for (let j = 0; j < appState.review[i].quantity; j++) {
+                    newCart.push(appState.review[i].name)
+                }
+
+            }
+            return newCart
+        }
+
+        if(appState.review.length){
+            const newCart = updateCart()
+    
+            setAppState((a) => ({
+                ...a,
+                cart: newCart
+            }))
+        }
+    },[total])
+
     //there's a bug with this useffect
-    // useEffect(() => {
-    //     const updateCart = () => {
-    //         let newCart = []
-    //         console.log(appState.review)
-    //         for (let i = 0; i < appState.review.length; i++) {
-    //             for (let j = 0; j < appState.review[i].quantity; j++) {
-    //                 newCart.push(appState.review[i].name)
-    //             }
+    useEffect(() => {
+        const updateTotal = () => {
+            let newTotal = 0
+            for (let i = 0; i < appState.review.length; i++) {
+                newTotal += appState.review[i].quantity
 
-    //         }
-    //         return newCart
-    //     }
+            }
+            return newTotal
 
-    //     const newCart = updateCart()
-    //     console.log(newCart)
+        }
 
-    //     setAppState((a) => ({
-    //         ...a,
-    //         cart: newCart
-    //     }))
-    // },[appState.review])
+        const newTotal = updateTotal()
+        if(newTotal){
+            setTotal(newTotal)
+        }
+        
+    },[appState.review])
+    // console.log(total)
 
     useEffect(() => {
         const updateReview = () => {
             const name = product.name
             const elementsIndex = appState.review.findIndex(product => product.name === name)
             let newArray = [...appState.review]
-            if (newArray.length) {
+            // console.log(appState.review)
+            if (newArray.length && elementsIndex>=0) {
                 newArray[elementsIndex].quantity = quantity
                 setAppState((a) => (
                     {
@@ -124,16 +149,29 @@ export default function CartCard({ product }) {
             {/* <CardMedia image={img} alt={product.name} height={200} width={150}></CardMedia> */}
             <CardContent>
                 {/* <CardMedia image={img} alt={product.name}></CardMedia> */}
-                <img src={img} width={150} height={150} alt={product.name}></img>
-                <div>
-                    <Typography>Item: {product.name}</Typography>
-                    <Typography>Total: ${product.quantity * price}</Typography>
-                    <Box display="flex" flexDirection="row" justifyContent="center">
-                        <input type="image" onClick={() => decrement()} id="image" height="25px" width="25px" alt="minus sign" src={minus_sign}></input>
-                        <Typography>{quantity}</Typography>
-                        <input type="image" onClick={() => increment()} id="image" height="25px" width="25px" alt="plus sign" src={plus_sign}></input>
-                    </Box>
-                </div>
+
+                <Grid container direction="row">
+                    <Grid item xs={4} container direction="row">
+                        <img src={img} width={150} height={150} alt={product.name}></img>
+                        <Box p={8}>
+                            <Typography>{product.name}</Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Box marginTop={8}>
+                            <Typography>Total: ${product.quantity * price}</Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={1}>
+                        <Box border={1}  marginTop={8} display="flex" alignItems='center' justifyContent="space-evenly">
+                            <IconButton onClick={() => decrement()}><RemoveIcon/></IconButton>
+                            {/* <input type="image" onClick={() => decrement()} id="image" height="40px" width="40px" alt="minus sign" src={minus_sign}></input> */}
+                            <Typography>{quantity}</Typography>
+                            <IconButton onClick={() => increment()}><AddIcon/></IconButton>
+                            {/* <input type="image" onClick={() => increment()} id="image" height="40px" width="40px" alt="plus sign" src={plus_sign}></input> */}
+                        </Box>
+                    </Grid>
+                </Grid>
 
             </CardContent>
 

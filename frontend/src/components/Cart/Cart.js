@@ -1,5 +1,5 @@
 import { useAppStateContext } from '../../contexts/appStateContext';
-import { Container, Button, Typography, Card, CardContent, CardMedia, Grid } from '@material-ui/core';
+import { Container, Button, Typography, Card, CardContent, CardMedia, Grid, Box } from '@material-ui/core';
 import apiClient from '../../services/apiClient';
 import { useState, useEffect } from "react"
 import axios from "axios"
@@ -20,34 +20,10 @@ export default function Cart() {
             {
                 ...a,
                 cart: [],
-                review:[]
+                review: []
             }
         ))
     }
-
-
-    // useEffect (() =>{
-    //     const updateCart = () =>{
-    //         let newCart = []
-    //         console.log(appState.review)
-    //         for (let i = 0; i < appState.review.length; i++) {
-    //             for (let i = 0; i < appState.review[i].quantity; i++){
-    //                 newCart.push(appState.review[i].name)
-    //             }
-                
-    //         }
-    //         console.log(newCart)
-    //         return newCart
-    //     }
-    
-    //     const newCart = updateCart()
-
-    //     setAppState((a) => ({
-    //         ...a,
-    //         cart:newCart
-    //     }))
-
-    // },[appState.review.length])
 
     const formatCart = () => {
         const obj = {}
@@ -76,41 +52,31 @@ export default function Cart() {
         cart.push(obj);
     }
 
-
-    const createOrder = async () => {
-        // console.log(cart)
-        const { data, error } = await apiClient.createOrder(
-            {
-                "cart": {
-                    address: "123 Street",
-                    products: cart
-                }
-            }
-        )
-        console.log(vendorState.currentOrders)
-        setvendorState(oldState => ({ currentOrders: [...oldState.currentOrders, data] }))
-        emptyCart()
-        // if (error){
-        //   setErrors((e) => ({ ...e, form:error}))
-        // }
-    }
-    // console.log(items)
-    // console.log(appState.cart1)
     return (
         <Container>
             <NavBar></NavBar>
             <Grid>
-            <Typography>Your Cart</Typography>
-            <Button onClick={()=>{navigate('/menu')}}>Add more items</Button>
+                <Typography>My Cart</Typography>
+                <Button onClick={() => { navigate('/menu') }}>Add more items</Button>
+                <Grid container spacing={3}>
+                    <Grid item xs={4}>
+                        Item
+                    </Grid>
+                    <Grid item xs={4}>
+                        Price
+                    </Grid>
+                    <Grid item xs={4}>
+                        Quantity
+                    </Grid>
+                </Grid>
             </Grid>
-            <Grid container>
+            <Grid >
                 {items.length === 0 ? "Cart is empty" : items.map((item, idx) => (
                     <CartCard product={item} key={idx}></CartCard>
                 ))}
             </Grid>
-            <Button onClick={createOrder}>Place Order</Button>
             <Button onClick={emptyCart}>Clear Cart</Button>
-            <Button onClick={()=>{navigate('/checkout')}}>Checkout Order</Button>
+            <Button onClick={() => { navigate('/checkout') }}>Checkout Order</Button>
         </Container>
 
 

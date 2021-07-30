@@ -36,6 +36,7 @@ export default function MenuCard({ product }) {
         }
         setQuantity(0)
     }
+    console.log(appState.cart)
 
     return (
         <Card >

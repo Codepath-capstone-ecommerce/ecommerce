@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import PaymentForm from "../PaymentForm/PaymentForm";
 import AddressForm from "../AddressForm/AddressForm";
 import { useNavigate } from "react-router-dom";
+import { useAppStateContext } from '../../contexts/appStateContext';
+import apiClient from '../../services/apiClient';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,10 +34,68 @@ export default function CheckOut() {
     const navigate = useNavigate()
     const [activeStep, setActiveStep] = useState(0)
     const classes = useStyles();
+    const { appState, setAppState,vendorState, setvendorState } = useAppStateContext()
+
+    const emptyCart = () => {
+        setAppState((a) => (
+            {
+                ...a,
+                cart: [],
+                review: []
+            }
+        ))
+    }
+
+    const formatCart = () => {
+        const obj = {}
+        for (let i = 0; i < appState.cart.length; i++) {
+            if (appState.cart[i] in obj) {
+                obj[appState.cart[i]] += 1
+            } else {
+                obj[appState.cart[i]] = 1
+            }
+        }
+
+        return obj
+    }
+
+    // console.log(prices)
+    const obj = formatCart()
+    const items = []
+    for (const [key, value] of Object.entries(obj)) {
+        items.push({ name: key, quantity: value });
+    }
+
+    const cart = []
+    for (const [key, value] of Object.entries(obj)) {
+        let obj = {}
+        obj[key] = value
+        cart.push(obj);
+    }
+
+    const createOrder = async () => {
+        const { data, error } = await apiClient.createOrder(
+            {
+                "cart": {
+                    address: "123 Street",
+                    products: cart
+                }
+            }
+        )
+        setvendorState(oldState => ({ currentOrders: [...oldState.currentOrders, data] }))
+        emptyCart()
+        // if (error){
+        //   setErrors((e) => ({ ...e, form:error}))
+        // }
+    }
+
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
-    const handleNext = () => {
+    const handleNext = (e) => {
+        if(e.target.innerHTML === "Finish"){
+            createOrder();
+        }
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 

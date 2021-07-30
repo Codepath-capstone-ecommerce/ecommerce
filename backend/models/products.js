@@ -16,6 +16,22 @@ class Products {
         return result.rows
     }
 
+    static async fetchProductByCategory(productCat) {
+        const result = await db.query(
+        `
+        SELECT products.name AS "name",
+               products.image_url AS "image",
+               products.price AS "price",
+               products.calories AS "cals"
+        FROM products
+        WHERE products.category = $1
+        `,
+            [productCat]
+        )
+
+        return result.rows
+    }
+
     static async createProduct({ product }) {
         // create a new order
         const productResult = await db.query(
