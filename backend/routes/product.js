@@ -17,6 +17,15 @@ router.get("/list", async (req, res, next) => {
   }
 })
 
+router.post("/category", async (req, res, next) => {
+  try {
+    const products = await Products.fetchProductByCategory(req.body.category)
+    return res.status(200).json({products})
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post("/create", async (req, res, next) => {
     try {
       const product = req.body
