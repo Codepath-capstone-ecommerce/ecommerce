@@ -11,6 +11,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useAppStateContext } from '../../contexts/appStateContext';
 import { useNavigate, Link } from "react-router-dom"
+import classnames from 'classnames';
 
 const useStyles = makeStyles({
     list: {
@@ -19,6 +20,16 @@ const useStyles = makeStyles({
     fullList: {
         width: 'auto',
     },
+    customButton: {
+        border: "3px solid",
+        borderColor: "#2EDBFD !important",
+        backgroundColor: "#000000",
+        color: "white !important",
+        "&:hover": {
+          color: "black !important",
+          backgroundColor: "#2EDBFD",
+        }
+      }
 });
 
 export default function UserDrawer() {
@@ -71,7 +82,7 @@ export default function UserDrawer() {
 
     return (
         <React.Fragment key={appState.first_name}>
-            <Button onClick={toggleDrawer('right', true)} variant="outlined">{appState.first_name}</Button>
+            <Button onClick={toggleDrawer('right', true)} className={classnames(classes.customButton, "glow-button")}>{appState.first_name}</Button>
             <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
                 {list('right')}
             </Drawer>

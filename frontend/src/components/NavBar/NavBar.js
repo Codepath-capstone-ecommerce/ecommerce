@@ -37,7 +37,7 @@ export default function NavBar() {
 
   const emptyUser = async () => {
     await apiClient.logoutUser()
-    navigate("/login")
+    navigate("/")
     setAppState({
       isAuthenticated: false,
     })
@@ -59,8 +59,8 @@ export default function NavBar() {
         <>
         <Button onClick={emptyUser} variant="outlined" className={classnames(classes.customButton, "glow-button")}>Log Out</Button> 
         <IconButton onClick={() => { navigate("/cart") }}>
-          <Badge badgeContent={appState.cart.length} color="primary">
-            <ShoppingCartIcon></ShoppingCartIcon>
+          <Badge badgeContent={appState.cart?appState.cart.length:0}>
+            <ShoppingCartIcon style={{ color: "#000" }}></ShoppingCartIcon>
           </Badge>
         </IconButton>
         </>:
