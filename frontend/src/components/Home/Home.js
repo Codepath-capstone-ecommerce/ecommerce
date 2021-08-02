@@ -8,7 +8,9 @@ import classNames from 'classnames'; //css and material ui style
 import NavBar from "../NavBar/NavBar";
 import classnames from 'classnames';
 import "./glitch.css"
+import "./Brick.css"
 import { grey } from "@material-ui/core/colors";
+import Footer from "../Footer/Footer";
 const useStyles = makeStyles((theme) => ({
     root: {
         minWidth: 275,
@@ -47,15 +49,194 @@ export default function Home() {
             height: 60,
             backgroundColor: "white",
             position: "relative",
-            zIndex: 2
+            zIndex: 3
           }}>
             <NavBar className={classnames(classes.navbar)} />
             </div>
-        <div id="background" className={classes.mainBackground}>
+        {/* <div id="background" className={classes.mainBackground}> */}
+        <div class="container" >
+            <div class="row">
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+            </div>
+            <div class="row">
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+          </div>
+          <div class="row">
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+            </div>
+            <div class="row">
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+          </div>
+          <div class="row">
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+            </div>
+            <div class="row">
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+          </div>
+          <div class="row">
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+            </div>
+            <div class="row">
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+          </div>
+          <div class="row">
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+            </div>
+            <div class="row">
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+          </div>
+          <div class="row">
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+            </div>
+            <div class="row">
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+          </div>
+          <div class="row">
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+            </div>
+            <div class="row">
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+            <div class="brick"></div>
+          </div>
+
+          </div>
         <div style={{
             position: "relative",
             zIndex: 1,
-            top: -30
+            top: -30,
+            marginTop: "-750px"
           }}>
         <Box align="center"  m="auto" className={classnames(classes.customSign,"rectangle")}
             display="flex"
@@ -70,31 +251,53 @@ export default function Home() {
             </Box>
             </div>
             {/* <div id="triangle" className={classNames("triangle")}></div> */}
-            <div></div>
-            <div class="center">
+            {/* <div class="oval"style={{
+            position: "relative",
+            zIndex: 3, 
+            top: "0px"}}></div> */}
+            <div class="center" style={{
+            position: "relative",
+            zIndex: 1
+          }}>
+            <div class="neon-box"></div>
+            <div class="neon-box2"></div>
+            </div>
+            <div class="center" style={{
+            position: "relative",
+            zIndex: 2,
+            top: "0px",
+            marginTop: "-593px"
+          }}>
             <div class="shadow2">
             <div class="triangle-wrapper">
                 <div class="triangle">
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
-                    <p id="kordell"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
+                    <p id="triangle-line"></p>
                 </div>
             </div>
             </div>
-            </div>
         </div>
+        <div style={{
+            height: 60,
+            backgroundColor: "white",
+            position: "relative",
+            zIndex: 2
+          }}>
+            <Footer className={classnames(classes.navbar)} />
+            </div>
       </div>
       
     );

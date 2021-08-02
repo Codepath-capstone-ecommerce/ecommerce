@@ -39,39 +39,6 @@ align-items: center;
     
 }
 
-/* .triangle{
-    margin-left: auto;
-    margin-right: auto;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 350px 500px 350px;
-    border-color: transparent transparent #000000 transparent;
-
-} */
-/* .triangle:before {
-    content: " ";
-    position: absolute;
-    z-index: -1;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-    border: 5px solid #2EDBFD;
-  } */
-
-  /* .triangle2{
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 350px 500px 350px;
-    border-color: transparent transparent #000000 transparent;
-
-} */
-
 
 .center {
     display: flex;
@@ -103,7 +70,7 @@ align-items: center;
  
 }
 
- #kordell {
+ #triangle-line {
     color: #fff;
     background-color: #fff;
     text-align: center;
@@ -111,9 +78,8 @@ align-items: center;
 }
 
 .neon-box {
-        z-index: 1;
-        height: 20px;
-        width: 20px;
+        height: 550px;
+        width: 650px;
         border: 0.2rem solid #fff;
         border-radius: 2rem;
         padding: 0.4em;
@@ -123,4 +89,26 @@ align-items: center;
                   0 0 0.8rem #2EDBFD,
                   0 0 2.8rem #2EDBFD,
                   inset 0 0 1.3rem #2EDBFD; 
+}
+
+.neon-box2 {
+    transform: rotate(0deg); /*Equal to rotateZ(5deg)*/
+    height: 550px;
+    width: 650px;
+    border: 0.2rem solid #fff;
+    border-radius: 2rem;
+    padding: 0.4em;
+    box-shadow: 0 0 .2rem #fff,
+              0 0 .2rem #fff,
+              0 0 2rem #2EDBFD,
+              0 0 0.8rem #2EDBFD,
+              0 0 2.8rem #2EDBFD,
+              inset 0 0 1.3rem #2EDBFD; 
+}
+
+.oval {
+    width: 735px;
+    height: 520px;
+    clip-path: ellipse(50% 25% at 50% 50%);
+    background-color: #fff;
 }

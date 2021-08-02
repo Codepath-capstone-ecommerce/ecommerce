@@ -1,0 +1,24 @@
+.container{
+    margin-top: 20px;
+    width: 100%;
+    /* max-width: 1000px; */
+    /* background-color: #ccc; */
+    background-color: #ccc;
+  }
+  
+  .row{
+    display: flex;
+  }
+  
+  .row:nth-child(even) .brick:first-child, .row:nth-child(even) .brick:last-child{
+    width: 70px;
+  }
+  
+  .brick{
+    width: 150px;
+    height: 50px;
+    background-color: #bd5858;
+    border-radius: 5px;
+    margin: 2px;
+    box-shadow: 0 0 19px 1px darken(#bd5858, 20%) inset;
+  }
