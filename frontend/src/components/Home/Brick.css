@@ -1,11 +1,58 @@
-.container{
-    margin-top: 20px;
-    width: 100%;
-    /* max-width: 1000px; */
+.container1{
+    /* margin-top: 20px;
+    width: 100%; */
+    display: block;
+    z-index: 2;
+    position: relative;
     /* background-color: #ccc; */
-    background-color: #ccc;
+    /* background-color: #ff0; */
+    width:100%;
+    height:800px;
   }
+
+  .container2{
+    /* margin-top: 20px;
+    width: 100%; */
+    /* display: block; */
+    background-color: #ccc;
+    /* background-color: #ff0; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width:100%;
+    height: 100%;
+ 
+  }
+
+  .container3{
+    position: absolute;
+    top: 240px;
+    left: 614px;
+    z-index: 3;
+  }
+
+  .oval {
+    width: 212px;
+    height: 220px;
+    clip-path: ellipse(50% 25% at 50% 50%);
+    background-color: black;
+}
+
+.oval:before {
+    width: 208px;
+    height: 216px;
+    clip-path: ellipse(50% 25% at 50% 50%);
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    
+}
   
+  .pyramidContainer{
+    position: relative; 
+    top: -125px;
+  }
   .row{
     display: flex;
   }
