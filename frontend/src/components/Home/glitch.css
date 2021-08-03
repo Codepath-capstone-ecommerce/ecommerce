@@ -105,10 +105,3 @@ align-items: center;
               0 0 2.8rem #2EDBFD,
               inset 0 0 1.3rem #2EDBFD; 
 }
-
-.oval {
-    width: 735px;
-    height: 520px;
-    clip-path: ellipse(50% 25% at 50% 50%);
-    background-color: #fff;
-}
