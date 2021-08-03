@@ -15,6 +15,7 @@ export default function Cart() {
     //     setCart(true)
     // }
 
+    // console.log(appState.cart)
     const emptyCart = () => {
         setAppState((a) => (
             {

@@ -14,10 +14,14 @@ export default function CartCard({ product }) {
     const [isLoading, setIsLoading] = useState(false)
     const [img, setImg] = useState([])
     const [price, setPrice] = useState(0)
-    const check = appState.review[appState.review.findIndex(products => products.name === product.name)]
-    const initialize = check ? check.quantity : product.quantity
-    const [quantity, setQuantity] = useState(initialize);
     const [total,setTotal] = useState(appState.cart.length)
+    let t = 0
+    for (let i =0; i<appState.review.length;i++){
+        t+= appState.review[i].quantity
+    }
+    const check = appState.review[appState.review.findIndex(products => products.name === product.name)]
+    const initialize = check && t ===total? check.quantity : product.quantity
+    const [quantity, setQuantity] = useState(initialize);
 
     // console.log(product)
     // console.log(appState.review)
@@ -37,7 +41,6 @@ export default function CartCard({ product }) {
     useEffect(() => {
         const updateCart = () => {
             let newCart = []
-            console.log(appState.review)
             for (let i = 0; i < appState.review.length; i++) {
                 for (let j = 0; j < appState.review[i].quantity; j++) {
                     newCart.push(appState.review[i].name)
