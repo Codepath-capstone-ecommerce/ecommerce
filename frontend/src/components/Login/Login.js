@@ -39,13 +39,19 @@ export default function Login(){
                     rewards:data.user.rewards,
                     last_name:data.user.last_last,
                     isAuthenticated: true,
-                    email:data.user.email
+                    email:data.user.email,
+                    is_admin:data.user.isAdmin
                 }
                 ))
           apiClient.setToken(data.token)
         }
+
         setIsProcessing(false)
-        navigate("/accountProfile")
+        if(data.user.isAdmin){
+            navigate("/vendordashboard")
+        }else{
+            navigate("/accountProfile")
+        }
       }
 
     const paperStyle = {

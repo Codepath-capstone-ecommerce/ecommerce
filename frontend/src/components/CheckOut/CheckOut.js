@@ -6,6 +6,7 @@ import AddressForm from "../AddressForm/AddressForm";
 import { useNavigate } from "react-router-dom";
 import { useAppStateContext } from '../../contexts/appStateContext';
 import apiClient from '../../services/apiClient';
+import Confirmation from "../Confirmation/Confirmation";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +36,14 @@ export default function CheckOut() {
     const [activeStep, setActiveStep] = useState(0)
     const classes = useStyles();
     const { appState, setAppState,vendorState, setvendorState } = useAppStateContext()
+    const [complete,setComplete] = useState(false)
+    const [form, setForm] = useState({
+        first_name: "",
+        last_name: "",
+        address:"",
+        email:"",
+        postal_code:""
+      })
 
     const emptyCart = () => {
         setAppState((a) => (
@@ -77,7 +86,7 @@ export default function CheckOut() {
         const { data, error } = await apiClient.createOrder(
             {
                 "cart": {
-                    address: "123 Street",
+                    address: form.address,
                     products: cart
                 }
             }
@@ -99,7 +108,7 @@ export default function CheckOut() {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
-
+    console.log(complete)
     return (
         <>
             <Paper className={classes.paper}>
@@ -116,24 +125,26 @@ export default function CheckOut() {
                 <div>
                     {activeStep === steps.length ? (
                         <div>
+                            <Confirmation></Confirmation>
                             <Typography className={classes.instructions}>
                                 All steps completed - you&apos;re finished
                             </Typography>
+                            <Button onClick={()=>navigate('/accountProfile')}>Go to profile</Button>
                         </div>
                     ) : (
                         <div>
-                            {activeStep === 0 ? <AddressForm /> : <PaymentForm></PaymentForm>}
+                            {activeStep === 0 ? <AddressForm form = {form} setForm={setForm} setComplete= {setComplete}/> : <PaymentForm></PaymentForm>}
                             <div>
                                 {activeStep===0? <Button onClick={() => { navigate('/cart') }}>Back to Cart</Button>:
                                 <Button onClick={handleBack} className={classes.button}>
                                     Back
                                 </Button>}
-                                
                                 <Button
                                     variant="contained"
                                     color="primary"
                                     onClick={handleNext}
                                     className={classes.button}
+                                    disabled={!complete}
                                 >
                                     {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                                 </Button>

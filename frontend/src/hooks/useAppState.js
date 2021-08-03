@@ -8,6 +8,7 @@ export default function useAppState() {
     first_name: "",
     last_name:"",
     email:"",
+    is_admin:false,
     isAuthenticated: false,
     cart: [],
     review:[],

@@ -17,10 +17,10 @@ import PersonRow from "../PersonRow/PersonRow";
 import { DateRangePicker } from 'react-date-range'; // date range
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-
-
+import { Link } from 'react-router-dom';
 import apiClient from '../../services/apiClient';
-
+import { useNavigate } from "react-router";
+import { useAppStateContext } from '../../contexts/appStateContext';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -66,30 +66,39 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserAnalytics() {
     const [selectedDate, handleDateChange] = useState(new Date());
+    const { appState, setAppState } = useAppStateContext()
+    const navigate = useNavigate()
     const classes = useStyles();
-    const [graphState,setGraphState] = useState({
-        customers:false,
-        orders:true
+    const [graphState, setGraphState] = useState({
+        customers: false,
+        orders: true
     })
     const [dateRange, setDateRange] = useState([
         {
-          startDate: new Date(),
-          endDate: new Date(),
-          key: 'selection'
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection'
         }
-      ]);
-    
+    ]);
+
+    const emptyUser = async () => {
+        await apiClient.logoutUser()
+        navigate("/")
+        setAppState({
+            isAuthenticated: false,
+        })
+    }
     const showGraph = () => {
         setGraphState((a) => (
             {
-                customers:!a.customers,
-                orders:!a.orders
+                customers: !a.customers,
+                orders: !a.orders
             }
-            ))
+        ))
     }
 
     console.log(graphState)
-    const range = dateRange[0].endDate.getDate() - dateRange[0].startDate.getDate() +1
+    const range = dateRange[0].endDate.getDate() - dateRange[0].startDate.getDate() + 1
     const start = dateRange[0].startDate
     return (
         <div className={classes.root}>
@@ -115,14 +124,22 @@ export default function UserAnalytics() {
                         <ListItemIcon><ListIcon /></ListItemIcon>
                         <ListItemText primary={'My Tasks'} />
                     </ListItem>
-                    <ListItem button key={'Clients'}>
+                    <ListItem button onClick={console.log('hi')} key={'Clients'}>
                         <ListItemIcon><PeopleIcon /></ListItemIcon>
                         <ListItemText primary={'Clients'} />
+                    </ListItem>
+                    <ListItem component={Link} to="/vendordashboard" key={'Clients'}>
+                        <ListItemIcon><PeopleIcon /></ListItemIcon>
+                        <ListItemText primary={'Dashboard'} />
+                    </ListItem>
+                    <ListItem button onClick={emptyUser} key={'Clients'}>
+                        <ListItemIcon><PeopleIcon /></ListItemIcon>
+                        <ListItemText primary={'Log Out'} />
                     </ListItem>
                 </List>
             </Drawer>
             <Box m={4} display="flex" flexDirection="column" justifyContent="center">
-                <Box m= {4} display="flex" flexDirection="row" justifyContent="space-between">
+                <Box m={4} display="flex" flexDirection="row" justifyContent="space-between">
                     <Card className={classes.card}>
                         <CardContent className={classes.cardcontent}>
                             <AttachMoneyIcon />
@@ -152,8 +169,8 @@ export default function UserAnalytics() {
                     className={classNames(classes.dateRange)}
                 />
                 <br></br>
-                {graphState.orders?<LineGraph range={range} dateRange={dateRange} start={start}/>:
-                <CustomerLineGraph range={range} dateRange={dateRange} start={start}/>}
+                {graphState.orders ? <LineGraph range={range} dateRange={dateRange} start={start} /> :
+                    <CustomerLineGraph range={range} dateRange={dateRange} start={start} />}
                 <br></br>
                 <br></br>
                 <Card className={classes.newCus}>

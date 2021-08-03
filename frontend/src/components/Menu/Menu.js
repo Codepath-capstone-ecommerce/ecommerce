@@ -71,7 +71,9 @@ export default function Menu() {
 
         fetchData()
     }, [])
+
     
+    // console.log(active)
     return (
         <div>
             <NavBar></NavBar>
@@ -81,16 +83,13 @@ export default function Menu() {
                     {categories.map((cat, idx) => (
                         <Box my={2}>
                             <Card key={idx}>
-                                {active.cat ?
+                                {active[cat] ?
                                     <CardActions style={{ backgroundColor: "#2ed9fb" }}>
                                         <Button onClick={getCat}>{cat}</Button>
                                     </CardActions> :
                                     <CardActions>
                                         <Button onClick={getCat}>{cat}</Button>
                                     </CardActions>}
-                                {/* <CardActions style={{backgroundColor: "#2ed9fb"}}>
-                                    <Button onClick={getCat}>{cat}</Button>
-                                </CardActions> */}
                             </Card>
                         </Box>
                     ))}

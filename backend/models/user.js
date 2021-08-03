@@ -5,7 +5,6 @@ const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 
 class User {
   static makePublicUser(user) {
-    console.log(user)
     return {
       id: user.id,
       first_name: user.first_name,
