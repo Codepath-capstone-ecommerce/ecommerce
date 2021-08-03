@@ -33,7 +33,8 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/register", async (req, res, next) => {
   try {
-    const user = await User.register({ ...req.body, is_admin: false })
+    const admin = req.body.isAdmin?req.body.isAdmin:false
+    const user = await User.register({ ...req.body, is_admin: admin })
     const token = createUserJwt(user)
     return res.status(201).json({ user, token })
   } catch (err) {
