@@ -15,7 +15,9 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import WarningIcon from '@material-ui/icons/Warning';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from "react-router";
+import apiClient from '../../services/apiClient';
+import { useAppStateContext } from '../../contexts/appStateContext';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -40,18 +42,27 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3)
   },
-  
+
 }));
 
 export default function VendorDashboard() {
+  const { appState, setAppState } = useAppStateContext()
   const classes = useStyles();
- 
-//   handleSelect(ranges){ console.log(ranges) }
+  const navigate = useNavigate()
+  const emptyUser = async () => {
+    await apiClient.logoutUser()
+    navigate("/")
+    setAppState({
+      isAuthenticated: false,
+    })
+  }
+
+  //   handleSelect(ranges){ console.log(ranges) }
 
   return (
     <div className={classes.root}>
-     
-      <AppBar  className={classes.appBar}>
+
+      <AppBar className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" noWrap>
             Vendor Order Dashboard
@@ -69,25 +80,29 @@ export default function VendorDashboard() {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-        <ListItem component={ Link } to="/vendorDashboard" button key={'Home'}>
-              <ListItemIcon><DashboardIcon /></ListItemIcon>
-              <ListItemText primary={'Home'} />
+          <ListItem component={Link} to="/vendorDashboard" button key={'Home'}>
+            <ListItemIcon><DashboardIcon /></ListItemIcon>
+            <ListItemText primary={'Home'} />
           </ListItem>
-          <ListItem component={ Link } to="/vendor/currentOrders" button key={'Current Orders'}>
-              <ListItemIcon><WarningIcon /></ListItemIcon>
-              <ListItemText primary={'Current Orders'} />
+          <ListItem component={Link} to="/vendor/currentOrders" button key={'Current Orders'}>
+            <ListItemIcon><WarningIcon /></ListItemIcon>
+            <ListItemText primary={'Current Orders'} />
           </ListItem>
-          <ListItem component={ Link } to="/vendor/pastOrders" button key={'Past Orders'}>
-              <ListItemIcon><PeopleIcon /></ListItemIcon>
-              <ListItemText primary={'Past Orders'} />
+          <ListItem component={Link} to="/vendor/pastOrders" button key={'Past Orders'}>
+            <ListItemIcon><PeopleIcon /></ListItemIcon>
+            <ListItemText primary={'Past Orders'} />
           </ListItem>
-          <ListItem button key={'Messages'}>
-              <ListItemIcon><MessageIcon /></ListItemIcon>
-              <ListItemText primary={'Messages'} />
+          <ListItem component={Link} to="/userAnalytics" key={'Messages'}>
+            <ListItemIcon><MessageIcon /></ListItemIcon>
+            <ListItemText primary={'User Analytics'} />
           </ListItem>
           <ListItem button key={'My Tasks'}>
-              <ListItemIcon><AssignmentIcon /></ListItemIcon>
-              <ListItemText primary={'My Tasks'} />
+            <ListItemIcon><AssignmentIcon /></ListItemIcon>
+            <ListItemText primary={'My Tasks'} />
+          </ListItem>
+          <ListItem button onClick={emptyUser} key={'Clients'}>
+            <ListItemIcon><PeopleIcon /></ListItemIcon>
+            <ListItemText primary={'Log Out'} />
           </ListItem>
         </List>
         <Divider />
