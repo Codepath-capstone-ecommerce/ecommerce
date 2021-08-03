@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button';
-import { useState } from "react"
-import { Grid, Paper ,Avatar, TextField, Typography, Link} from '@material-ui/core';
+import { useEffect, useState } from "react"
+import { Grid, Paper ,Avatar, TextField, Typography, Link, Input} from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -9,18 +9,52 @@ import apiClient from '../../services/apiClient';
 import { useAppStateContext } from '../../contexts/appStateContext';
 
 
-export default function AddressForm(){
+export default function AddressForm({form, setForm, setComplete}){
     const { appState, setAppState} = useAppStateContext()
     const navigate = useNavigate()
     const [isProcessing, setIsProcessing] = useState(false)
     const [errors, setErrors] = useState({})
-    const [form, setForm] = useState({
-    first_name: "",
-    last_name: "",
-    address:"",
-    email:"",
-    postal_code:""
-  })
+    // const [complete,setComplete] = useState(false)
+//     const [form, setForm] = useState({
+//     first_name: "",
+//     last_name: "",
+//     address:"",
+//     email:"",
+//     postal_code:""
+//   })
+  useEffect(() =>{
+      const checkDefaultValues = () =>{
+          if(appState.first_name !==""){
+              setForm((f) => ({ ...f, first_name: appState.first_name }))
+          }
+          if(appState.last_name !==""){
+              setForm((f) => ({ ...f, last_name: appState.last_name }))
+          }
+          if(appState.address !==""){
+              setForm((f) => ({ ...f, address: appState.address }))
+          }
+          if(appState.email !==""){
+              setForm((f) => ({ ...f, email: appState.email }))
+          }
+        //   if(appState.postal_code !==""){
+        //       setForm((f) => ({ ...f, postal_code: appState.postal_code }))
+        //   }
+      }
+      checkDefaultValues()
+  },[])
+
+  useEffect(()=>{
+    let c = true
+    for (const [key, value] of Object.entries(form)) {
+        if(form[key] === "" || (key ==="postal_code" && form[key].length !==5)){
+            c = false
+        }
+    }
+    setComplete(c)
+    
+
+  },[form])
+
 
     const handleOnInputChange = (event) => {
         setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
@@ -57,12 +91,14 @@ export default function AddressForm(){
         width:280,
         margin:"20px auto"
     }
+    // console.log(complete)
     return(
         <div>
             <Paper elevation = {10} style= {paperStyle}>
                 <Typography variant="h6" align="center">Delivery Information</Typography>
                 <TextField  
                     onChange={handleOnInputChange} 
+                    defaultValue={appState.first_name}
                     name ="first_name"
                     label = "First Name" 
                     placeholder = "Enter first name"  
@@ -71,6 +107,7 @@ export default function AddressForm(){
                 <TextField 
                     onChange={handleOnInputChange} 
                     name ="last_name"
+                    defaultValue={appState.last_name}
                     label = "Last Name" 
                     placeholder = "Enter last name"   
                     required
@@ -78,6 +115,7 @@ export default function AddressForm(){
                 <TextField 
                     onChange={handleOnInputChange} 
                     name ="address"
+                    defaultValue={appState.address}
                     label = "Address" 
                     placeholder = "Enter address" 
                     fullWidth 
@@ -86,7 +124,8 @@ export default function AddressForm(){
                 <TextField 
                     onChange={handleOnInputChange} 
                     name ="email"
-                    label = "Email" 
+                    label = "Email"
+                    defaultValue={appState.email} 
                     placeholder = "Enter email" 
                     fullWidth 
                     required
