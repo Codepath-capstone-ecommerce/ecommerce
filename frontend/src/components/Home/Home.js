@@ -11,6 +11,8 @@ import "./glitch.css"
 import "./Brick.css"
 import { grey } from "@material-ui/core/colors";
 import Footer from "../Footer/Footer";
+import pizzaImg from "../../assets/pizzaoven.jpeg"
+
 const useStyles = makeStyles((theme) => ({
     root: {
         minWidth: 275,
@@ -54,7 +56,8 @@ export default function Home() {
             <NavBar className={classnames(classes.navbar)} />
             </div>
         {/* <div id="background" className={classes.mainBackground}> */}
-        <div class="container" >
+        <div id="containBricks" class="container1" >
+        <div id="backgroundBricks" class="container2" >
             <div class="row">
               <div class="brick"></div>
               <div class="brick"></div>
@@ -230,18 +233,33 @@ export default function Home() {
             <div class="brick"></div>
             <div class="brick"></div>
           </div>
-
+          <div class="row">
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+              <div class="brick"></div>
+            </div>
           </div>
         <div style={{
             position: "relative",
-            zIndex: 1,
+            zIndex: 2,
             top: -30,
-            marginTop: "-750px"
+            marginTop: "--300",
+            marginBottom: "150px",
           }}>
         <Box align="center"  m="auto" className={classnames(classes.customSign,"rectangle")}
             display="flex"
             justifyContent="center"
-            alignItems="center">
+            // position= "absolute"
+            alignItems="center"
+            top="10px"
+            right="50px">
                     <Typography align="left"style={{zIndex: "4 !important"}} className={classNames("title-font",classes.title, classes.overlay)} >
                       Simply Pizza .
                     </Typography>
@@ -250,11 +268,14 @@ export default function Home() {
                     </Typography>
             </Box>
             </div>
+           
             {/* <div id="triangle" className={classNames("triangle")}></div> */}
-            {/* <div class="oval"style={{
-            position: "relative",
-            zIndex: 3, 
-            top: "0px"}}></div> */}
+            <div id="ovalContainer" class="container3">
+            <img src={pizzaImg} alt="pizza_eye" class="oval"style={{
+            zIndex: 8, 
+            top: "0px"}}></img>
+            </div>
+            <div id="pyramidContainer" class="pyramidContainer">
             <div class="center" style={{
             position: "relative",
             zIndex: 1
@@ -289,6 +310,8 @@ export default function Home() {
                 </div>
             </div>
             </div>
+            </div>
+        </div>
         </div>
         <div style={{
             height: 60,
