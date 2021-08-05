@@ -1,0 +1,41 @@
+.rectangle {
+    /* Rectangle 70 */
+position: 'absolute';
+width: 241px;
+height: 40;
+left: 23px;
+top: -28px;
+background: rgb(0, 0, 0);
+mix-blend-mode: darken;
+border-radius: 25px;
+
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.title-font{
+    color: white !important;
+    font-style: italic;
+    
+}
+.shadow{ 
+    text-shadow: 0 1px 0 rgb(102, 30, 30),
+               0 2px 0 rgb(116, 255, 255),
+               0 3px 0 rgb(255, 253, 38),
+               0 4px 0 rgb(174, 38, 38),
+               0 5px 0 rgb(174, 38, 38),
+               0 6px 1px rgba(0,0,0,.1),
+               /* 0 0 5px rgba(0,0,0,.1), */
+               0 0 5px rgba(120, 214, 235, 0.892),
+               0 1px 3px rgba(0,0,0,.3),
+               0 3px 5px rgba(120, 214, 235, 0.892),
+               /* 0 3px 5px rgba(0,0,0,.2), */
+               0 5px 10px rgba(0,0,0,.25),
+               0 10px 10px rgba(120, 214, 235, 0.892),
+               /* 0 10px 10px rgba(0,0,0,.2), */
+               /* 0 20px 20px rgba(120, 214, 235, 0.892); */
+               0 20px 20px rgba(0,0,0,.15);
+    
+}
+
