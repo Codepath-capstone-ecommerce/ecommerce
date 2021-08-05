@@ -1,9 +1,9 @@
-import minus_sign from "../../assets/minus_sign.svg"
-import plus_sign from "../../assets/plus_sign.svg"
 import { useState } from "react"
-import { Card, Typography, Box, Button } from "@material-ui/core"
+import { Card, Typography, Box, Button, IconButton } from "@material-ui/core"
 import { useAppStateContext } from '../../contexts/appStateContext';
 import { Link } from "react-router-dom"
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 //write function that can send products to a cart once buttons are clicked
 export default function MenuCard({ product }) {
@@ -29,7 +29,7 @@ export default function MenuCard({ product }) {
         for (let i = 0; i < quantity; i++) {
             setAppState((a) => (
                 {
-                    ...a, 
+                    ...a,
                     cart: [...a.cart, product.name]
                 }
             ))
@@ -51,14 +51,16 @@ export default function MenuCard({ product }) {
                         <span>Calories: {`${product.cals}`}</span>
                         <br></br>
                     </Box>
-                    {appState.first_name?<Box display="flex" flexDirection="row" justifyContent="center">
-                        <input type="image" onClick={increment} id="image" height="25px" width="25px" alt="plus sign" src={plus_sign}></input>
+                    {appState.first_name ? <Box border={1} marginTop={1} display="flex" alignItems='center' justifyContent="space-evenly">
+                        <IconButton onClick={() => decrement()}><RemoveIcon /></IconButton>
+                        {/* <input type="image" onClick={() => decrement()} id="image" height="40px" width="40px" alt="minus sign" src={minus_sign}></input> */}
                         <Typography>{quantity}</Typography>
-                        <input type="image" onClick={decrement} id="image" height="25px" width="25px" alt="minus sign" src={minus_sign}></input>
-                    </Box>:<div></div>}
+                        <IconButton onClick={() => increment()}><AddIcon /></IconButton>
+                        {/* <input type="image" onClick={() => increment()} id="image" height="40px" width="40px" alt="plus sign" src={plus_sign}></input> */}
+                    </Box> : <div></div>}
                     <br></br>
                     {/* Have a terninary operator to only have cart function if a user is logged in */}
-                    {appState.first_name?<Button variant="outlined" disabled={quantity === 0} onClick={addToCart}>Add to Cart</Button>:<div></div>}
+                    {appState.first_name ? <Box><Button variant="outlined" disabled={quantity === 0} onClick={addToCart}>Add to Cart</Button></Box> : <div></div>}
                 </Box>
             </Box>
         </Card>
