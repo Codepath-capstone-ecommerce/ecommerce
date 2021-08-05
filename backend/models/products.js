@@ -32,15 +32,15 @@ class Products {
         return result.rows
     }
 
-    static async createProduct({ product }) {
+    static async createProduct(product) {
         // create a new order
         const productResult = await db.query(
             `
-          INSERT INTO products(name, image_url,price, calories,description) 
-          VALUES ($1, $2, $3, $4, $5)
+          INSERT INTO products(name, image_url,price, calories,description,category) 
+          VALUES ($1, $2, $3, $4, $5, $6)
           RETURNING id,name, category,image_url,calories,price,description
         `,
-            [product.name, product.image_url, product.price, product.calories, product.description]
+            [product.name, product.image_url, product.price, product.calories, product.description, product.category]
         )
 
         // get orderId
@@ -56,7 +56,8 @@ class Products {
         SELECT products.name AS "name",
                products.image_url AS "image",
                products.price AS "price",
-               products.calories AS "cals"
+               products.calories AS "cals",
+               products.category AS "cat"
         FROM products
         WHERE products.id = $1
         `,

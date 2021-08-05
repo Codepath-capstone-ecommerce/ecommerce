@@ -85,8 +85,10 @@ export default function CheckOut() {
         obj[key] = value
         cart.push(obj);
     }
-
-    const createOrder = async () => {
+    // console.log(vendorState)
+    // console.log(form.address)
+    const createO = async () => {
+        // console.log(form.address)
         const { data, error } = await apiClient.createOrder(
             {
                 "cart": {
@@ -107,7 +109,8 @@ export default function CheckOut() {
     };
     const handleNext = (e) => {
         if(e.target.innerHTML === "Finish"){
-            createOrder();
+            createO();
+            emptyCart();
         }
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -149,7 +152,7 @@ export default function CheckOut() {
                                 onClick={handleNext}
                                 className={classes.button}
                                 disabled={!payment}
-                                > Finish
+                                >Finish
                                 </Button>:
                                 <Button
                                 variant="contained"
