@@ -39,6 +39,8 @@ export default function CartCard({ product }) {
 
     //fix bug with add more items from the cart
     useEffect(() => {
+
+        const uniqueCart = [...new Set(appState.cart)]
         const updateCart = () => {
             let newCart = []
             for (let i = 0; i < appState.review.length; i++) {
@@ -50,7 +52,7 @@ export default function CartCard({ product }) {
             return newCart
         }
 
-        if(appState.review.length){
+        if(appState.review.length === uniqueCart.length){
             const newCart = updateCart()
     
             setAppState((a) => ({
@@ -78,8 +80,21 @@ export default function CartCard({ product }) {
         }
         
     },[appState.review])
-    // console.log(total)
 
+    const removeFromCart = () =>{
+        const result = appState.review.filter(p => p.name !== product.name)
+        const result1 = appState.cart.filter(p => p !== product.name)
+        console.log(result1)
+        setAppState((a) => (
+            {
+                ...a,
+                review: result,
+                cart:result1
+            }
+        ))
+    }
+    // console.log(appState.review)
+    // console.log(appState.cart)
     useEffect(() => {
         const updateReview = () => {
             const name = product.name
@@ -173,6 +188,7 @@ export default function CartCard({ product }) {
                             <IconButton onClick={() => increment()}><AddIcon/></IconButton>
                             {/* <input type="image" onClick={() => increment()} id="image" height="40px" width="40px" alt="plus sign" src={plus_sign}></input> */}
                         </Box>
+                        <Button onClick={removeFromCart}>Remove Item</Button>
                     </Grid>
                 </Grid>
 
