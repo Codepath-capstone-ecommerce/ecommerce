@@ -13,7 +13,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Link from "@material-ui/core/Link";
-import {formatDate } from "../../utils/format";
+import { formatDate } from "../../utils/format";
 import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import { useEffect, useState } from "react";
@@ -23,6 +23,8 @@ import axios from "axios";
 import { DateRangePicker } from 'react-date-range'; // date range
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import PersistentDrawerLeft from "../Practice/Practice";
+import NewOrder from "../NewOrder/NewOrder";
 
 function getModalStyle() {
   const top = 50
@@ -129,13 +131,13 @@ export default function VendorCurrentOrders() {
     setFilterOrder(
       vendorState.pastOrders.filter(item => {
         let date = new Date(item.created_at)
-        date.setHours(0,0,0,0)
+        date.setHours(0, 0, 0, 0)
         // console.log(date)
         // console.log("start: ",start)
         // console.log("end: ",end)
         return date >= start && date <= end;
-     }
-    ))
+      }
+      ))
   }, [start, end, vendorState.pastOrders]);
 
   console.log(filterOrder)
@@ -234,96 +236,100 @@ export default function VendorCurrentOrders() {
 
   return (
     <div className={classes.root}>
-      <VendorDashboard />
+      {/* <VendorDashboard /> */}
+      <PersistentDrawerLeft name={'Past Orders'} />
       <div style={{
-        position: 'absolute', 
-        left: '50%', 
+        position: 'absolute',
+        left: '50%',
         top: '50%',
         transform: 'translate(-50%, -50%)',
         display: 'block'
-    }}>
-      
+      }}>
+
       </div>
       <main className={classes.content}>
-      <Grid container
-        alignItems='center'
-        justifyContent='center'
-        style={{ minHeight: "100vh" }}>
+        <Box mt={10}>
+          <NewOrder />
+        </Box>
+        <Grid container
+          alignItems='center'
+          justifyContent='center'
+          style={{ minHeight: "100vh" }}>
           <Grid item xs='auto'>
-          <DateRangePicker
-                    onChange={item => setDateRange([item.selection])}
-                    showSelectionPreview={true}
-                    moveRangeOnFirstSelection={false}
-                    months={1}
-                    ranges={dateRange}
-                    direction="horizontal"
-                    className={classNames(classes.dateRange)}
-                />
-        </Grid>
-        <Grid item xs={12}>
-        <Container className={classNames(classes.customContainer)}>
-          <Typography align="left" className={classNames(classes.title)}>
-            Past Orders
-          </Typography>
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell align="left">Order ID</TableCell>
-                <TableCell align="left">Date </TableCell>
-                <TableCell align="left">Delivery</TableCell>
-                <TableCell align="center">Order Information</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filterOrder.map((order, index) => (
-                <TableRow
-                  key={order.order_id}
-                  style={
-                    index % 2
-                      ? { background: "#F3F3F3" }
-                      : { background: "white" }
-                  }
-                >
-                  <TableCell align="left">{order.order_id}</TableCell>
-                  <TableCell align="left">{formatDate(order.created_at)}</TableCell>
-                  <TableCell align="left">
-                    {order.delivery_address === "pick-up" ? "No" : "Yes"}
-                  </TableCell>
-                  <MuiThemeProvider theme={theme}>
-                    <TableCell align="center">
-                      <Button
-                        id={order.order_id}
-                        onClick={() => handleClickModal(order.order_id)}
-                        variant="contained"
-                        className={classes.showMoreButton}
-                      >
-                        {" "}
-                        Show More{" "}
-                      </Button>
-                    </TableCell>
-                  </MuiThemeProvider>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <div className={classes.seeMore}>
-            <Link color="primary" href="#" onClick={preventDefault}>
-              See more orders
-            </Link>
-          </div>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-          >
-            {body}
-          </Modal>
-        </Container>
-        </Grid>
+            <DateRangePicker
+              onChange={item => setDateRange([item.selection])}
+              showSelectionPreview={true}
+              moveRangeOnFirstSelection={false}
+              months={1}
+              ranges={dateRange}
+              direction="horizontal"
+              className={classNames(classes.dateRange)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Container className={classNames(classes.customContainer)}>
+              <Typography align="left" className={classNames(classes.title)}>
+                Past Orders
+              </Typography>
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left">Order ID</TableCell>
+                    <TableCell align="left">Date </TableCell>
+                    <TableCell align="left">Delivery</TableCell>
+                    <TableCell align="center">Order Information</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filterOrder.map((order, index) => (
+                    <TableRow
+                      key={order.order_id}
+                      style={
+                        index % 2
+                          ? { background: "#F3F3F3" }
+                          : { background: "white" }
+                      }
+                    >
+                      <TableCell align="left">{order.order_id}</TableCell>
+                      <TableCell align="left">{formatDate(order.created_at)}</TableCell>
+                      <TableCell align="left">
+                        {order.delivery_address === "pick-up" ? "No" : "Yes"}
+                      </TableCell>
+                      <MuiThemeProvider theme={theme}>
+                        <TableCell align="center">
+                          <Button
+                            id={order.order_id}
+                            onClick={() => handleClickModal(order.order_id)}
+                            variant="contained"
+                            className={classes.showMoreButton}
+                          >
+                            {" "}
+                            Show More{" "}
+                          </Button>
+                        </TableCell>
+                      </MuiThemeProvider>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              <div className={classes.seeMore}>
+                <Link color="primary" href="#" onClick={preventDefault}>
+                  See more orders
+                </Link>
+              </div>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+              >
+                {body}
+              </Modal>
+            </Container>
+          </Grid>
         </Grid>
       </main>
-     
+
     </div>
   );
 }
