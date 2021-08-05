@@ -51,7 +51,7 @@ export default function NavBar() {
       <Box className={classes.root}>
         <Button onClick={() => { navigate("/menu") }} variant="outlined" className={classnames(classes.customButton, "glow-button")}>Menus</Button>
         <Button onClick={() => { navigate("/aboutUs") }} variant="outlined" className={classnames(classes.customButton, "glow-button")}>Our Story</Button>
-        <Button onClick={() => { navigate("/order") }} variant="outlined" className={classnames(classes.customButton, "glow-button")}>Order Now</Button>
+        {/* <Button onClick={() => { navigate("/order") }} variant="outlined" className={classnames(classes.customButton, "glow-button")}>Order Now</Button> */}
         {appState.isAuthenticated ? <UserDrawer></UserDrawer> :
           <Button onClick={() => { navigate("/login") }} variant="outlined" className={classnames(classes.customButton, "glow-button")} >Login</Button>
         }

@@ -6,11 +6,12 @@ import apiClient from '../../services/apiClient';
 
 //grab stripe promise with public key  (put into env file later)
 const stripePromise = loadStripe('pk_test_51JHVxDAT6YdOUgSd9z0elQAkI6zeC8p4dd8YBYk2nTyIiGumxkBUqPXnyQPdNGKhfVAwTCmgoWUVl57H5EBrIOsL00J3lY34QJ')
-export default function PaymentForm({ checkoutToken }) {
+export default function PaymentForm({ checkoutToken, setPayment }) {
 
     const handleSubmit = async (event,elements,stripe) => {
         event.preventDefault();
 
+        console.log('here')
         if(!stripe || !elements) return ;
 
         const cardElement = elements.getElement(CardElement)
@@ -33,6 +34,14 @@ export default function PaymentForm({ checkoutToken }) {
         }
     }
 
+    const handleOnInputChange = (event) => {
+        if (event.complete){
+            setPayment(true)
+        }else{
+            setPayment(false)
+        }
+    }
+
     return (
         <>
         <Review></Review>
@@ -41,7 +50,7 @@ export default function PaymentForm({ checkoutToken }) {
             <ElementsConsumer>
                 {({ elements, stripe }) => (
                     <form onSubmit={(e) => handleSubmit(e,elements,stripe)}>
-                        <CardElement/>
+                        <CardElement onChange={handleOnInputChange}/>
                         <br/> <br/>
                         {/* <div style={{display:'flex', justifyContent: 'space-between'}}>
                             <Button>Back</Button>

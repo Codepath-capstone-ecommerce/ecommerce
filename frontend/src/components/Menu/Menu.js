@@ -19,11 +19,12 @@ export default function Menu() {
     const [isLoading, setIsLoading] = useState(false)
     const [products, setProduct] = useState([])
     const [active, setActive] = useState({
+        "All":true,
         "Pizza":false,
         "Drink":false,
         "misc":false
     })
-    const categories = ['Pizza', 'Drink', 'misc']
+    const categories = ['All','Pizza', 'Drink', 'misc']
     const checkout = () => {
         navigate('/cart')
     }
@@ -39,36 +40,39 @@ export default function Menu() {
             }
         }
         setActive(obj)
-        const fetchData = async () => {
-            try {
-                const productRes = await apiClient.fetchProductsByCategory({ category: e.target.innerHTML })
-                if (productRes?.data?.products) {
-                    setProduct(productRes.data.products)
+        if (e.target.innerHTML !== 'All'){
+            const fetchData = async () => {
+                try {
+                    const productRes = await apiClient.fetchProductsByCategory({ category: e.target.innerHTML })
+                    if (productRes?.data?.products) {
+                        setProduct(productRes.data.products)
+                    }
+                } catch (err) {
+                    setError(err)
                 }
-            } catch (err) {
-                setError(err)
             }
+            fetchData()
+        }else{
+            fetchData()
         }
-        fetchData()
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsLoading(true)
-            try {
-                const productRes = await axios.get("http://localhost:3001/products/list")
-                if (productRes?.data?.products) {
-                    setProduct(productRes.data.products)
-                }
-
-            } catch (err) {
-                console.log({ err })
-                setError(err)
+    const fetchData = async () => {
+        setIsLoading(true)
+        try {
+            const productRes = await axios.get("http://localhost:3001/products/list")
+            if (productRes?.data?.products) {
+                setProduct(productRes.data.products)
             }
 
-            setIsLoading(false)
+        } catch (err) {
+            console.log({ err })
+            setError(err)
         }
 
+        setIsLoading(false)
+    }
+    useEffect(() => {
         fetchData()
     }, [])
 
@@ -79,7 +83,7 @@ export default function Menu() {
             <NavBar></NavBar>
             <br></br>
             <Grid container justifyContent="space-around">
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                     {categories.map((cat, idx) => (
                         <Box my={2}>
                             <Card key={idx}>

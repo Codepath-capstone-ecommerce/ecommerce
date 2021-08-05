@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
         marginLeft:theme.spacing(40),
         padding: theme.spacing(2)
     },
+    step: {
+        background: '#2ed9fb',
+    }
 }));
 
 const steps = ["Delivery Info", "Payment Methods"]
@@ -37,6 +40,7 @@ export default function CheckOut() {
     const classes = useStyles();
     const { appState, setAppState,vendorState, setvendorState } = useAppStateContext()
     const [complete,setComplete] = useState(false)
+    const [payment,setPayment] = useState(false)
     const [form, setForm] = useState({
         first_name: "",
         last_name: "",
@@ -108,7 +112,6 @@ export default function CheckOut() {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
-    console.log(complete)
     return (
         <>
             <Paper className={classes.paper}>
@@ -133,13 +136,30 @@ export default function CheckOut() {
                         </div>
                     ) : (
                         <div>
-                            {activeStep === 0 ? <AddressForm form = {form} setForm={setForm} setComplete= {setComplete}/> : <PaymentForm></PaymentForm>}
+                            {activeStep === 0 ? <AddressForm form = {form} setForm={setForm} setComplete= {setComplete}/> : <PaymentForm setPayment={setPayment}></PaymentForm>}
                             <div>
                                 {activeStep===0? <Button onClick={() => { navigate('/cart') }}>Back to Cart</Button>:
                                 <Button onClick={handleBack} className={classes.button}>
                                     Back
                                 </Button>}
+                                {activeStep === steps.length - 1 ?
                                 <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleNext}
+                                className={classes.button}
+                                disabled={!payment}
+                                > Finish
+                                </Button>:
+                                <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleNext}
+                                className={classes.button}
+                                disabled={!complete}
+                                > Next
+                                </Button>}
+                                {/* <Button
                                     variant="contained"
                                     color="primary"
                                     onClick={handleNext}
@@ -147,7 +167,7 @@ export default function CheckOut() {
                                     disabled={!complete}
                                 >
                                     {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                </Button>
+                                </Button> */}
                             </div>
                         </div>
                     )}
