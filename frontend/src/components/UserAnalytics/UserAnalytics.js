@@ -155,7 +155,7 @@ export default function UserAnalytics() {
                     <Card className={classes.card}>
                         <CardContent className={classes.cardcontent}>
                             < ReportIcon />
-                            <Typography>Report</Typography>
+                            <Typography>Export PDF</Typography>
                         </CardContent>
                     </Card>
                 </Box>
