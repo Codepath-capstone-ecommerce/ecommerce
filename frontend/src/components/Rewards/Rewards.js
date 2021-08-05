@@ -53,7 +53,7 @@ export default function Rewards() {
     return (
         <Box>
             <NavBar></NavBar>
-            <Box px={80}>
+            <Box mx={5}>
                 <Box display="flex" justifyContent="space-between" px="auto">
                     <Box display="flex" flexDirection="column" alignItems="flex-start">
                         <Typography>
@@ -68,7 +68,7 @@ export default function Rewards() {
                     </Typography>
                 </Box>
 
-                <Box px="auto" pt={5}>
+                <Box pt={5}>
                     <BorderLinearProgress variant="determinate" value={(appState.rewards/30)*100} />
                 </Box>
 
@@ -84,13 +84,13 @@ export default function Rewards() {
                         <Link>Favorites</Link>
                     </Button>
                 </Box>
-                <Box px={15} py={2}>
+                <Box px={10} py={2}>
                     <Divider></Divider>
                 </Box>
                 {tab.rewards?
                 <Box display="flex" flexDirection="row" justifyContent="space-between" px="auto">
                     <Card>
-                        <Box px={3} py={3}>
+                        <Box mx={3}>
                             <img src="http://codepath-lifetracker.surge.sh/static/media/codepath.70a9a31f.svg" width={100} height={200}></img>
                             {/* <CardMedia
                                 className={styles.media}
