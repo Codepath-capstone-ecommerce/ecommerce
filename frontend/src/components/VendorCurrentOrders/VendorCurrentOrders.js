@@ -26,6 +26,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
 import axios from "axios";
+import PersistentDrawerLeft from "../Practice/Practice";
 
 
 function getModalStyle() {
@@ -225,7 +226,8 @@ export default function VendorCurrentOrders() {
 
   return (
     <div className={classes.root}>
-      <VendorDashboard />
+      {/* <VendorDashboard /> */}
+      <PersistentDrawerLeft name={"Current Orders"}/>
       <main className={classes.content}>
         <Container className={classNames(classes.customContainer)}>
           <Typography align="left" className={classNames(classes.title)}>

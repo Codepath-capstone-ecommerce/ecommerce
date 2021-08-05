@@ -33,6 +33,10 @@ class ApiClient {
     }
   }
 
+  async createProduct(data){
+    return await this.request({endpoint: 'products/create', method: "POST", data:data})
+  }
+
   async fetchProductsByCategory(data){
     return await this.request({endpoint: 'products/category', method: "POST", data:data})
   }

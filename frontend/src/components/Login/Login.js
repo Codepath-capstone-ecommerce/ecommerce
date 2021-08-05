@@ -50,7 +50,7 @@ export default function Login() {
         setIsProcessing(false)
         if (data?.user) {
             if (data.user.isAdmin) {
-                navigate("/vendordashboard")
+                navigate("/userAnalytics")
             } else {
                 navigate("/accountProfile")
             }
