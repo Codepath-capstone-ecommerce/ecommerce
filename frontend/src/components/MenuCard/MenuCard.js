@@ -25,7 +25,6 @@ export default function MenuCard({ product }) {
     obj[product.name] = product.price
 
     const addToCart = () => {
-
         for (let i = 0; i < quantity; i++) {
             setAppState((a) => (
                 {
