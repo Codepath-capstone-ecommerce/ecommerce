@@ -227,17 +227,6 @@ export default function SignUp(){
                 </Grid> 
                 </Grid>
                 </Grid>
-                {/* <TextField 
-                    onChange={handleOnInputChange}
-                    name = "username"
-                    label = "Username" 
-                    placeholder = "Enter username" 
-                    fullWidth 
-                    required
-                    InputLabelProps={{
-                        shrink: true,
-                      }}
-                /> */}
                 <Grid item>
                 <TextField 
                     onChange={handleOnInputChange}

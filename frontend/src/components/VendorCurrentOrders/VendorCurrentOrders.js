@@ -158,12 +158,17 @@ export default function VendorCurrentOrders() {
    let json = {"orderId" : id}
    const res = await apiClient.completeOrderDetailByID(json)
    console.log(res.data?.orders)
-   setvendorState( (vendorState) => ( {
+   setvendorState( (vendorState) => {
+     const newPastOrders = [...vendorState.pastOrders, vendorState.currentOrders.find(order =>(
+      order.order_id === id))]
+      newPastOrders.sort((a, b) => a.order_id - b.order_id)
+    return {
+    pastOrders : newPastOrders
+   ,
      //will need to do the same when adding new orders, except add to the vendor state, instead of filtering.
     currentOrders: vendorState.currentOrders.filter(order =>(
       order.order_id !== id //filtering, if id matches throw it out, otherwise keep all orders
-    ))
-   }))
+    ))}})
 
   }
 
