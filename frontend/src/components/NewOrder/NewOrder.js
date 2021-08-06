@@ -45,7 +45,7 @@ export default function NewOrder() {
             setErrors((e) => ({ ...e, form: error }))
         }
         setIsProcessing(false)
-        // handleClose()
+        handleClose()
     }
 
     const paperStyle = {
