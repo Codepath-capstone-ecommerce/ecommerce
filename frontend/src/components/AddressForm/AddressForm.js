@@ -18,8 +18,8 @@ export default function AddressForm({ form, setForm, setComplete }) {
     const [firstError, setFirstError] = useState(true)
     const [lastError, setLastError] = useState(true)
     const [emailError, setEmailError] = useState(true)
-    const regExp = /[a-zA-Z]/g;
-    const allLetters = /^[a-zA-Z']+$/;
+    const regExp = /[a-zA-Z-.]/g;
+    const allLetters = /^[a-zA-Z'-.]+$/;
     // const [complete,setComplete] = useState(false)
     //     const [form, setForm] = useState({
     //     first_name: "",
