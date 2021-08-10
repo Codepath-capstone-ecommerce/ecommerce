@@ -3,6 +3,7 @@ const { BCRYPT_WORK_FACTOR } = require("../config");
 const db = require("../db");
 const { BadRequestError, UnauthorizedError } = require("../utils/errors");
 const Products = require("../models/products")
+const sgMail = require("@sendgrid/mail");
 
 class Order {
   static async fetchOrderById(orderId) {
@@ -167,15 +168,22 @@ class Order {
 
     let arr = cart.cart.products;
     //console.log(arr.length)
+    let emailText = ""
+    let totalCost = 0
     for (let i = 0; i < arr.length; i++) {
       let obj = arr[i];
       let productName = Object.keys(obj)[0]; //LOOKUP product name in products to get productID type Integer
       let id = await Products.fetchProductByName(productName)
       let productId =  id[0].productId // grab the productID for each product
       let quantity = Number(obj[productName]);
+      let price = id[0].price
+      let cost = price * quantity
     //   console.log(order[0].orderId)
     //   console.log(productId)
     //   console.log(quantity)
+      totalCost = totalCost + cost
+      let productRowText =  productName + " : " + String(price) + " x " + String(quantity) + " = " + String(cost)
+      emailText = emailText + productRowText + " <br> "
       
       const orderResult = await db.query(
         `
@@ -190,6 +198,42 @@ class Order {
     const orderID = order[0].orderId
     //console.log(orderID)
     //console.log(orderID.productId)
+
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    console.log(process.env.SENDGRID_API_KEY)
+    // console.log(typeof(totalCost))
+    const msg = {
+      "personalizations":[
+         {
+            "to":[
+               {
+                  "email": user.email //user.email //change to current customer email
+               }
+            ],
+            "dynamic_template_data":{
+               "body": emailText,
+               "total" : String(totalCost)
+            }
+         }
+      ],
+      "from":{
+         "email":"kordellschrock@gmail.com",
+         "name":"Simply Pizza."
+      },
+      "reply_to":{
+         "email":"kordellschrock@gmail.com",
+         "name":"Simply Pizza."
+      },
+      "template_id":"d-c447ae34e5de4e368bf642a19d5d994e"
+   };
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log("Email sent");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
     return await Order.fetchOrderDetailById(orderID);
   }

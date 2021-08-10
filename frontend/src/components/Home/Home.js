@@ -270,11 +270,11 @@ export default function Home() {
             </div>
            
             {/* <div id="triangle" className={classNames("triangle")}></div> */}
-            <div id="ovalContainer" class="container3">
+            {/* <div id="ovalContainer" class="container3">
             <img src={pizzaImg} alt="pizza_eye" class="oval"style={{
             zIndex: 8, 
             top: "0px"}}></img>
-            </div>
+            </div> */}
             <div id="pyramidContainer" class="pyramidContainer">
             <div class="center" style={{
             position: "relative",
