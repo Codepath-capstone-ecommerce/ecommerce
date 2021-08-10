@@ -1,28 +1,101 @@
-@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
-    /* body {
-      background: var(--clr-bg);
-      font-family: "Balsamiq Sans", cursive;
-      color: var(--clr-neon);
-     
-    } */
-    .glow-button{
-      font-family: 'Balsamiq Sans', cursive;
-      border-radius: 0.25em;
-      text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body{
+	line-height: 1.5;
+	font-family: 'Poppins', sans-serif;
+}
+/* *{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+} */
+.containerr{
+	margin:auto;
+  /* padding-left: 20%; */
+  background-color: black;
+  
+}
+.row2{
+	display: flex;
+  justify-content: center;
+  margin-left: 50px;
+  
+}
+ul{
+	list-style: none;
+}
+.footer{
+	background-color: #24262b;
+ 
+}
+.footer-col{
+   width: 22%;
+  
+}
+.footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #2EDBFD;
+	height: 2px;
+	box-sizing: border-box;
+	width:90px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
 
-      box-shadow: inset 0 0 0.5em 0 var(--clr-neon), 0 0 0.5em 0 var(--clr-neon);
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
 
-      position: relative;
-    }
-    .glow-button:hover {
-      color: rgba(255, 255, 255, 1);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-    }
-    
-    #pizza {
-      position: relative; /* Declared position allows for location changes */
-      top: -22px; /* Moves the image 2px closer to the top of the page */
-      transform: rotate(-5deg); /*Equal to rotateZ(5deg)*/
-      height: 90px;
-      width: 90px;
-    }
+
+
+

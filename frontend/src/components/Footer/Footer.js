@@ -46,20 +46,44 @@ export default function Footer() {
 
 
   return (
-    <Box display="flex" justifyContent="space-between" alignItems="center" pt={2} pr={5}>
-        <Box className={classes.root}>
-        <FacebookIcon className={classes.largeIcon}/>
-        <TwitterIcon className={classes.largeIcon}/>
-        <InstagramIcon className={classes.largeIcon}/>
-        </Box>
-        <Typography variant="body1" className={classes.title} color="inherit">
-        46 Star Island Dr, Miami Beach, FL 33139
-       </Typography>
-       <Typography variant="body1" color="inherit">
-                © 2021 Simply Pizza. 
-       </Typography>
-      
-    </Box>
+    <div class="containerr">
+    <div class="row2">
+      <div class="footer-col">
+        <h4>Simply Pizza.</h4>
+        <ul>
+          <li><a href="#">about us</a></li>
+          <li><a href="#">privacy policy</a></li>
+          <li><a href="#">affiliate program</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>get help</h4>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">order status</a></li>
+          <li><a href="#">payment options</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+  	 			<h4>Locations</h4>
+  	 			<ul>
+          <li><a href="#">Miami, FL</a></li>
+          <li><a href="#">San Francisco, CA</a></li>
+          <li><a href="#">Dallas, TX</a></li>
+        </ul>
+  	 		</div>
+      <div class="footer-col">
+        <h4>follow us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    
+    </div>
+  </div>
 
   )
 }
