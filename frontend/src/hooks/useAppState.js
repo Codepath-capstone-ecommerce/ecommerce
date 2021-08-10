@@ -14,7 +14,8 @@ export default function useAppState() {
     review:[],
     favorites:[],
     rewards: 0,
-    address:''
+    address:'',
+    pastOrders: []
   })
   
 
@@ -42,11 +43,24 @@ export default function useAppState() {
       }
       if (error) setError(error)
     }
+  const fetchUserOrders = async () => {
+    const {data, error} = await apiClient.getUserOrders()
+    if(data){
+      setAppState((a) => (
+        {
+          ...a, 
+          pastOrders: data.orders
+        }
+      ))
+    }
+    if (error) setError(error)
+  }
 
     const token = localStorage.getItem("pizza_shop_token")
     if (token) {
       apiClient.setToken(token)
       fetchUser()
+      fetchUserOrders()
     }
   }, [])
 

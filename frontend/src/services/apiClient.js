@@ -52,6 +52,10 @@ class ApiClient {
     return await this.request({ endpoint: 'admin/weeklyorders', method: "POST", data:data})
   }
 
+  async getUserOrders(){
+    return await this.request({endpoint:'order/list', method:"GET"})
+  }
+
   async getCurrentOrders(){
     return await this.request({endpoint:'order/current', method:"GET"})
   }
