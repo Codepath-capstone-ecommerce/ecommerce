@@ -14,6 +14,7 @@ import PaymentForm from '../PaymentForm/PaymentForm';
 import { AppStateProvider} from "../../contexts/appStateContext"
 import CheckOut from '../CheckOut/CheckOut';
 import Home from '../Home/Home';
+import VendorProductPage from '../VendorProductPage/VendorProductPage';
 
 export default function AppContainer(){
   return(
@@ -41,6 +42,7 @@ function App() {
          <Route path="/vendorDashboard" element={<VendorDashboardHome/>} />
         <Route path="/vendor/currentOrders" element={<VendorRecentOrders/>} />
         <Route path="/vendor/pastOrders" element={<VendorPastOrders/>} />
+        <Route path="/vendor/products" element={<VendorProductPage/>}/>
       </Routes>
       </BrowserRouter>
     </div>
