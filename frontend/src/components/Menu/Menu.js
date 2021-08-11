@@ -88,11 +88,11 @@ export default function Menu() {
                         <Box my={2}>
                             <Card key={idx}>
                                 {active[cat] ?
-                                    <CardActions style={{ backgroundColor: "#2ed9fb" }}>
-                                        <Button fullWidth onClick={getCat}>{cat}</Button>
+                                    <CardActions style={{ padding:'0px', backgroundColor: "#2ed9fb", borderRadius: "0.25em", borderColor: "#000", border: `3px solid` }}>
+                                        <Button fullWidth style={{ padding:'8px'}} onClick={getCat}>{cat}</Button>
                                     </CardActions> :
-                                    <CardActions>
-                                        <Button fullWidth onClick={getCat}>{cat}</Button>
+                                    <CardActions style={{ padding:'0px', borderRadius: "0.25em", borderColor: "#000", border: `3px solid` }}>
+                                        <Button fullWidth style={{ padding:'8px'}} onClick={getCat}>{cat}</Button>
                                     </CardActions>}
                             </Card>
                         </Box>
