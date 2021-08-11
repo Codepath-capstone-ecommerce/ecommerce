@@ -16,6 +16,7 @@ import Modal from "@material-ui/core/Modal";
 import { createTheme } from "@material-ui/core/styles";
 import Footer from "../Footer/Footer";
 
+
 function getModalStyle() {
     const top = 50
     const left = 50
@@ -88,10 +89,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function AccountProfile() {
-    useEffect(() => {
-        // const {data, error } = apiClient.getUserOrders()
-        // console.log(data)
-    }, []);
 
     const { appState} = useAppStateContext()
     const [modalStyle] = useState(getModalStyle);
