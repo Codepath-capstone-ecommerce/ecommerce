@@ -15,11 +15,14 @@ import classnames from 'classnames';
 
 const useStyles = makeStyles({
     list: {
-        width: 250,
+        width: 250
     },
     fullList: {
-        width: 'auto',
+        width: 'auto'
     },
+    paper: {
+        background: "black"
+      },
     customButton: {
         border: "3px solid",
         borderColor: "#2EDBFD !important",
@@ -65,15 +68,20 @@ export default function UserDrawer() {
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
-            <List>
-                    <ListItem button key="My Rewards">
+            <List >
+                    <br></br>
+                    <ListItem button key="My Rewards"style={{ width:'90%' , marginLeft:10, marginRight:10, backgroundColor:'white', borderRadius: 20, borderColor: "#2EDBFD", border: `3px solid`}}>
+                    <Button fullWidth style={{ fontWeight:'Bold' }} onClick={myRewards} >
                         <ListItemIcon><AttachMoneyIcon /> </ListItemIcon>
-                        <Button onClick={myRewards} >My Rewards</Button>
+                       My Rewards
+                       </Button>
                         {/* <ListItemText primary={text} /> */}
                     </ListItem>
-                    <ListItem button key="My Profile">
+                    <br></br>
+                    <ListItem button key="My Profile" style={{width:'90%' , marginLeft:10, marginRight:10, backgroundColor:'white', borderRadius: 20, borderColor: "#2EDBFD", border: `3px solid`}}>
+                       <Button fullWidth  style={{ fontWeight:'Bold' }} onClick={myAccount} >
                         <ListItemIcon><AccountCircleIcon /></ListItemIcon>
-                        <Button onClick={myAccount} >My Profile</Button>
+                        My Profile</Button>
                         {/* <ListItemText primary={text} /> */}
                     </ListItem>
             </List>
@@ -81,9 +89,9 @@ export default function UserDrawer() {
     );
 
     return (
-        <React.Fragment key={appState.first_name}>
+        <React.Fragment key={appState.first_name} >
             <Button onClick={toggleDrawer('right', true)} className={classnames(classes.customButton, "glow-button")}>{appState.first_name}</Button>
-            <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
+            <Drawer classes={{ paper: classes.paper }}  anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
                 {list('right')}
             </Drawer>
         </React.Fragment>
