@@ -89,10 +89,10 @@ export default function Menu() {
                             <Card key={idx}>
                                 {active[cat] ?
                                     <CardActions style={{ backgroundColor: "#2ed9fb" }}>
-                                        <Button onClick={getCat}>{cat}</Button>
+                                        <Button fullWidth onClick={getCat}>{cat}</Button>
                                     </CardActions> :
                                     <CardActions>
-                                        <Button onClick={getCat}>{cat}</Button>
+                                        <Button fullWidth onClick={getCat}>{cat}</Button>
                                     </CardActions>}
                             </Card>
                         </Box>
