@@ -19,6 +19,7 @@ import apiClient from '../../services/apiClient';
 import { useNavigate } from "react-router-dom";
 import AccountEditModal from "../AccountEditModal/AccountEditModal";
 
+
 function getModalStyle() {
   const top = 50
   const left = 50
@@ -91,10 +92,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function AccountProfile() {
-  useEffect(() => {
-    // const {data, error } = apiClient.getUserOrders()
-    // console.log(data)
-  }, []);
 
   const { appState, setAppState } = useAppStateContext()
   const [modalStyle] = useState(getModalStyle);

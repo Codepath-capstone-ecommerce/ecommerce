@@ -64,32 +64,32 @@ export default function useAppState() {
     }
   }, [])
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      const { data, error } = await apiClient.getCurrentOrders()
-      if (data) {
-        setvendorState((a) => (
-          {
-            ...a, currentOrders: data.orders
-          }
-        ))
-      }
-      if (error) setError(error)
-    }
-    const fetchPastOrders = async () => {
-      const { data, error } = await apiClient.getPastOrders()
-      if (data) {
-        setvendorState((a) => (
-          {
-            ...a, pastOrders: data.orders
-          }
-        ))
-      }
-      if (error) setError(error)
-    }
-    fetchOrders()
-    fetchPastOrders()
-  }, [])
+  // useEffect(() => {
+  //   const fetchOrders = async () => {
+  //     const { data, error } = await apiClient.getCurrentOrders()
+  //     if (data) {
+  //       setvendorState((a) => (
+  //         {
+  //           ...a, currentOrders: data.orders
+  //         }
+  //       ))
+  //     }
+  //     if (error) setError(error)
+  //   }
+  //   const fetchPastOrders = async () => {
+  //     const { data, error } = await apiClient.getPastOrders()
+  //     if (data) {
+  //       setvendorState((a) => (
+  //         {
+  //           ...a, pastOrders: data.orders
+  //         }
+  //       ))
+  //     }
+  //     if (error) setError(error)
+  //   }
+  //   fetchOrders()
+  //   fetchPastOrders()
+  // }, [])
 
   // useEffect(() => {
   //   const fetchCart = async () => {
