@@ -46,6 +46,7 @@ export default function NewOrder() {
         }
         setIsProcessing(false)
         handleClose()
+        window.location.reload()
     }
 
     const paperStyle = {
