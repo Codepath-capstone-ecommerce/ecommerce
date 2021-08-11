@@ -24,19 +24,13 @@ const useStyles = makeStyles(() => ({
      }
     },
     cardHover:{
+        transition: "transform 0.15s ease-in-out",
         '&:hover': {
+            transform: "scale3d(1.05, 1.05, 1)",
             raised: true
          }
     },
-    // overrides: {
-    //     MuiButton: {
-    //      root: {
-    //       "&:hover": {
-    //         backgroundColor: "#f00",
-    //       },
-    //      }
-    //     }
-    // }
+    
   }
 ));
 
@@ -72,21 +66,20 @@ export default function MenuCard({ product }) {
         }
         setQuantity(0)
     }
-    console.log(appState.cart)
 
     return (
         <Box mt={2} mb={2} className={classNames("make-it-slow",classes.menuCardHover)} >
             <Card className={classes.cardHover} style={{ borderRadius: 20, borderColor: "#2EDBFD", backgroundColor: "#2CDBFD",
         border: `4px solid`}}>
                 <Box display="flex" flexDirection="column" p={5}  >
-                    <img src={`${product.image}`} alt={`${product.name}`} width={150} height={130}></img>
+                    <img style={{ backgroundColor: "#fff", borderRadius: 20, borderColor: "#000", border: `3px solid`}} src={`${product.image}`} alt={`${product.name}`} width={150} height={130}></img>
                     <br></br>
                     <Box>
                         <Box display="flex" flexDirection="column" style={{ backgroundColor: "#fff", borderRadius: 20, borderColor: "#000", border: `3px solid`, padding:10}}>
-                            <Typography className="name">{`${product.name}`}</Typography>
+                            <Typography style={{fontWeight: 'bold'}}className="name">{`${product.name}`}</Typography>
                             <br></br>
-                            <span>Price: ${`${product.price}`}</span>
-                            <span>Calories: {`${product.cals}`}</span>
+                            <Typography className="name">Price: ${`${product.price}`}</Typography>
+                            <Typography className="name">Calories: {`${product.cals}`}</Typography>
                             <br></br>
                         </Box>
                         {appState.first_name ? <Box border={1} marginTop={1} display="flex" alignItems='center' justifyContent="space-evenly" style={{ borderRadius: 20, borderColor: "#000", backgroundColor: "#fff",
