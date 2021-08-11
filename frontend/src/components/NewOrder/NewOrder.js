@@ -56,7 +56,7 @@ export default function NewOrder() {
     }
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>Create Product</Button>
+            <Button variant="outlined" onClick={handleClickOpen}>Add new item</Button>
             <Dialog aria-labelledby="customized-dialog-title" open={open} onClose={handleClose}>
                 <DialogTitle id="customized-dialog-title">
                     Create Product
