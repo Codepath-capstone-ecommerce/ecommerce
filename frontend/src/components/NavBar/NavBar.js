@@ -48,7 +48,8 @@ export default function NavBar() {
       review: [],
       favorites: [],
       rewards: 0,
-      address: ''
+      address: '',
+      pastOrders: []
     })
 
   }
