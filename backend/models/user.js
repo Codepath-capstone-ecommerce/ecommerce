@@ -99,7 +99,28 @@ class User {
 
     const result = await db.query(query, [address.address, user.email.toLowerCase()])
      
-    return address.address + ": address has been updated!"
+    return address.address
+  }
+
+  static async updateUsersEmail({user, email}) {
+    if (!user) {
+      throw new BadRequestError("No user provided")
+    }
+    const requiredFields = ["email"]
+    requiredFields.forEach(field =>{
+      if(!email.hasOwnProperty(field)){
+          throw new BadRequestError(`Required field - ${field} - missing from request body.`)
+      }
+  })
+  const oldEmail = user.email.toLowerCase()
+    const query = `
+    UPDATE users
+    SET email = $1
+    WHERE email = $2`
+
+    const result = await db.query(query, [email.email, oldEmail])
+     
+    return email.email
   }
 
   static async getRewardPoints({user}) {
