@@ -143,7 +143,7 @@ export default function AddressForm({ form, setForm, setComplete }) {
     return (
         <div>
             {/* ask ellis what she thinks about no border */}
-            <div style={paperStyle}>
+            <Paper elevation={1} style={paperStyle}>
                 <Typography variant="h6" align="center">Delivery Information</Typography>
                 <TextField
                     onChange={handleOnInputChange}
@@ -197,7 +197,7 @@ export default function AddressForm({ form, setForm, setComplete }) {
                     fullWidth
                     required
                 />
-            </div>
+            </Paper>
         </div>
     )
 }
