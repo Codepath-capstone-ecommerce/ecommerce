@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      backgroundColor: "#fffff"
+      backgroundColor: "#fffff",
+      height:48
     },
   },
   customButton: {
@@ -53,7 +54,7 @@ export default function NavBar() {
 
   }
   return (
-    <Box display="flex" justifyContent="space-between" mt={1} px={5}>
+    <Box display="flex" justifyContent="space-between" my={1} px={5} height="64px">
       <Link to={"/"}>
         <img src={pizzaImg} id="pizza" alt="logo" ></img>
       </Link>
