@@ -19,6 +19,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import MessageIcon from '@material-ui/icons/Message';
 import ListIcon from '@material-ui/icons/List';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
 import PeopleIcon from '@material-ui/icons/People';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AssessmentIcon from '@material-ui/icons/Assessment';
@@ -135,7 +136,6 @@ export default function PersistentDrawerLeft({ name }) {
                         <Typography variant="h6" noWrap>
                             {name}
                         </Typography>
-                        <NewOrder />
                     </Box>
                 </Toolbar>
             </AppBar>
@@ -166,6 +166,10 @@ export default function PersistentDrawerLeft({ name }) {
                     <ListItem button onClick={() => { navigate('/userAnalytics') }} key={'User Analytucs'}>
                         <ListItemIcon><AssessmentIcon /></ListItemIcon>
                         <ListItemText primary={'User Analytics'} />
+                    </ListItem>
+                    <ListItem button onClick={() => { navigate('/vendor/products') }} key={'Products'}>
+                        <ListItemIcon><FastfoodIcon /></ListItemIcon>
+                        <ListItemText primary={'Products'} />
                     </ListItem>
                     <ListItem button onClick={emptyUser} key={'Clients'}>
                         <ListItemIcon><ExitToAppIcon /></ListItemIcon>

@@ -43,34 +43,38 @@ export default function VendorProductPage() {
 
 
     return (
-        <div>
+        <Box display="flex">
             <PersistentDrawerLeft name={'Products'} />
             <br></br>
-            <Typography>
-                Create new product
-            </Typography>
-            <NewOrder/>
-            <Grid container justifyContent="space-around">
-                <Grid
-                    item
-                    container
-                >
-                    {products.map((product, idx) => (
-                        <Box mx={2}>
-                            <img src={`${product.image}`} alt={`${product.name}`} width={150} height={130}></img>
-                            <br></br>
-                            <Box display="flex" flexDirection="column">
-                                <span className="name">{`${product.name}`}</span>
+            <Box m={6}>
+                <Box my={3}>
+                    <Typography>
+                        Create new product
+                    </Typography>
+                    <NewOrder />
+                </Box>
+                <Grid container justifyContent="space-around" mx={3}>
+                    <Grid
+                        item
+                        container
+                    >
+                        {products.map((product, idx) => (
+                            <Box mx={2}>
+                                <img src={`${product.image}`} alt={`${product.name}`} width={150} height={130}></img>
                                 <br></br>
-                                <span>Price: ${`${product.price}`}</span>
-                                <span>Calories: {`${product.cals}`}</span>
-                                <br></br>
+                                <Box display="flex" flexDirection="column">
+                                    <span className="name">{`${product.name}`}</span>
+                                    <br></br>
+                                    <span>Price: ${`${product.price}`}</span>
+                                    <span>Calories: {`${product.cals}`}</span>
+                                    <br></br>
+                                </Box>
                             </Box>
-                        </Box>
-                    ))}
+                        ))}
+                    </Grid>
                 </Grid>
-            </Grid>
-        </div>
+            </Box>
+        </Box>
 
     )
 }

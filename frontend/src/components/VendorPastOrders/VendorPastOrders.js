@@ -248,9 +248,6 @@ export default function VendorCurrentOrders() {
 
       </div>
       <main className={classes.content}>
-        <Box mt={10}>
-          <NewOrder />
-        </Box>
         <Grid container
           alignItems='center'
           justifyContent='center'
