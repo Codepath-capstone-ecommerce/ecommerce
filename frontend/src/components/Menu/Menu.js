@@ -8,7 +8,7 @@ import NavBar from "../NavBar/NavBar"
 import { useNavigate } from "react-router-dom";
 import { useAppStateContext } from '../../contexts/appStateContext';
 import apiClient from '../../services/apiClient';
-
+import Footer from '../Footer/Footer'
 
 //class should import appstate that contains products
 //loop through each product to create a menucard
@@ -82,7 +82,7 @@ export default function Menu() {
         <div>
             <NavBar></NavBar>
             <br></br>
-            <Grid container justifyContent="space-around">
+            <Grid container justifyContent="space-around" style={{marginBottom:10 }}>
                 <Grid item xs={2}>
                     {categories.map((cat, idx) => (
                         <Box my={2}>
@@ -109,7 +109,9 @@ export default function Menu() {
                         </Box>
                     ))}
                 </Grid>
+               
             </Grid>
+            <Footer/>
         </div>
 
     )
