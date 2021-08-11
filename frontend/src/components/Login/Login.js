@@ -105,6 +105,8 @@ export default function Login() {
                 navigate("/userAnalytics")
             } else {
                 navigate("/accountProfile")
+                window.location.reload();
+
             }
         }else{
             setInvalid(true)
