@@ -22,13 +22,13 @@ export default function Review() {
                             <img
                                 srcSet={item.img}
                                 alt={item.name}
-                                loading="lazy"
+                                // loading="lazy"
                                 width={150}
                                 height={150}
                             />
                         </ImageListItem>
                         <ListItemText primary={item.name} secondary={`Quantity: ${item.quantity}`}></ListItemText>
-                        <Typography variant="body2">Total: ${item.quantity * item.price}</Typography>
+                        <Typography variant="body2">Subtotal: ${item.quantity * item.price}</Typography>
                     </ListItem>
                 ))}
                 <ListItem>

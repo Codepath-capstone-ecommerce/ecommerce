@@ -46,11 +46,8 @@ export default function VendorProductPage() {
         <Box display="flex">
             <PersistentDrawerLeft name={'Products'} />
             <br></br>
-            <Box m={6}>
+            <Box m={7}>
                 <Box my={3}>
-                    <Typography>
-                        Create new product
-                    </Typography>
                     <NewOrder />
                 </Box>
                 <Grid container justifyContent="space-around" mx={3}>
