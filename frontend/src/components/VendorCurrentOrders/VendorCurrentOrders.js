@@ -157,7 +157,7 @@ export default function VendorCurrentOrders() {
   const handleClickCompleteOrder = async (id) => {
    let json = {"orderId" : id}
    const res = await apiClient.completeOrderDetailByID(json)
-   console.log(res.data?.orders)
+  //  console.log(res.data?.orders)
    setvendorState( (vendorState) => {
      const newPastOrders = [...vendorState.pastOrders, vendorState.currentOrders.find(order =>(
       order.order_id === id))]
@@ -171,6 +171,7 @@ export default function VendorCurrentOrders() {
     ))}})
 
   }
+  console.log(vendorState.currentOrders)
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
