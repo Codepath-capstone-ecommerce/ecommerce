@@ -109,7 +109,17 @@ export default function PersistentDrawerLeft({ name }) {
         await apiClient.logoutUser()
         navigate("/")
         setAppState({
+            first_name: "",
+            last_name: "",
+            email: "",
+            is_admin: false,
             isAuthenticated: false,
+            cart: [],
+            review: [],
+            favorites: [],
+            rewards: 0,
+            address: '',
+            pastOrders: []
         })
     }
 
