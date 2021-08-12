@@ -24,7 +24,7 @@ export default function CartCard({ product }) {
     const [quantity, setQuantity] = useState(initialize);
 
     // console.log(product)
-    // console.log(appState.review)
+    // console.log(appState.cart)
 
     const increment = () => {
         setQuantity((q) => (q + 1))
@@ -96,10 +96,13 @@ export default function CartCard({ product }) {
     // console.log(appState.review)
     // console.log(appState.cart)
     useEffect(() => {
+        // console.log('here')
+        // console.log(quantity,product.name)
         const updateReview = () => {
             const name = product.name
             const elementsIndex = appState.review.findIndex(product => product.name === name)
             let newArray = [...appState.review]
+            // console.log(elementsIndex)
             // console.log(appState.review)
             if (newArray.length && elementsIndex >= 0) {
                 newArray[elementsIndex].quantity = quantity
@@ -115,10 +118,7 @@ export default function CartCard({ product }) {
         updateReview()
     }, [quantity])
 
-    // console.log(appState.cart)
     useEffect(() => {
-
-
         const fetchData = async () => {
             try {
                 const productRes = await apiClient.fetchProductByName({ productName: product })
@@ -134,11 +134,13 @@ export default function CartCard({ product }) {
                 obj['img'] = productRes.data.productResponse[0].img
                 obj['quantity'] = quantity
 
+                // console.log(obj)
                 let copy = true
+                console.log(appState.review)
                 // review = [{name:"pizza",'price':2,'img':imgurl,'quantity':3}]
                 // let existReview = appState.review.find((review) => review.name === product.name)
                 // console.log(existReview)
-                for (let i = 0; appState.review.length; i++) {
+                for (let i = 0; i<appState.review.length; i++) {
                     if (appState.review[i].name === product.name) {
                         copy = false
                     }
@@ -151,8 +153,6 @@ export default function CartCard({ product }) {
                         }
                     ))
                 }
-
-
             } catch (err) {
                 setError(err)
             }
